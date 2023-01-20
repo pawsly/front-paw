@@ -1,12 +1,18 @@
-import './assets/css/index.css';
+import "./assets/css/index.css";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Login from "./components/user/LoginPage";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>😎</h1>
-      <h2 className="title">🔥scss 셋업 완료🔥</h2>
+    <div className="app">
+      <span className="title">PAWSLY</span>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
