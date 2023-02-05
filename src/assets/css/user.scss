@@ -41,6 +41,17 @@
         background-color: #ebebeb;
         border-radius: 248px;
 
+        input {
+          width: 100%;
+          height: 55px;
+          background-color: #ebebeb;
+          border: 0;
+          outline: 0;
+          font-size: 16px;
+          font-weight: lighter;
+          color: #928d8d;
+        }
+
         &-active {
           width: 359px;
           height: 59px;
@@ -50,6 +61,17 @@
           background-color: rgba(85, 184, 11, 0.14);
           border: 3px solid #55b80b;
           border-radius: 248px;
+
+          input {
+            width: 100%;
+            height: 55px;
+            background: none;
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            font-weight: lighter;
+            color: #928d8d;
+          }
         }
       }
 
@@ -59,21 +81,6 @@
       }
 
       // -input인 경우랑 -input-active인 경우 모두 적용하려고 바깥으로 뺌
-      input {
-        width: 100%;
-        height: 55px;
-        background-color: #ebebeb;
-        border: 0;
-        outline: 0;
-        font-size: 16px;
-        font-weight: lighter;
-        color: #928d8d;
-
-        &:focus {
-          background: none;
-        }
-      }
-
       .check-icon {
         color: #2dd042;
       }
