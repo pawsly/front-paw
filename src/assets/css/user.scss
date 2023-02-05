@@ -29,7 +29,7 @@
       &-welcome {
         margin-bottom: 53px;
         font-size: 45px;
-        color: #348f6c;
+        color: #55b80b;
       }
 
       &-input {
@@ -42,34 +42,46 @@
         background-color: #ebebeb;
         border-radius: 248px;
 
-        &-acitve {
-          background-color: rgba(153, 211, 166, 0.45);
-          border: 3px solid #348f6c;
-        }
-
-        input {
-          width: 100%;
+        &-active {
+          width: 359px;
           height: 59px;
-          background-color: #ebebeb;
-          border: 0;
-          outline: 0;
-          font-size: 16px;
-          font-weight: lighter;
-          color: #928d8d;
+          margin-top: 31px;
+          padding: 0 22px 0 32px;
+          display: flex;
+          align-items: center;
+          background-color: rgba(85, 184, 11, 0.14);
+          border: 3px solid #55b80b;
+          border-radius: 248px;
         }
+      }
 
-        .check-icon {
-          color: #2dd042;
+      // -input인 경우랑 -input-active인 경우 모두 적용하려고 바깥으로 뺌
+      input {
+        width: 100%;
+        height: 55px;
+        background-color: #ebebeb;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        font-weight: lighter;
+        color: #928d8d;
+
+        &:focus {
+          background: none;
         }
+      }
 
-        .eye-icon {
-          opacity: 0.5;
-          cursor: pointer;
-          transition: all 200ms;
+      .check-icon {
+        color: #2dd042;
+      }
 
-          &:hover {
-            opacity: 1;
-          }
+      .eye-icon {
+        opacity: 0.5;
+        cursor: pointer;
+        transition: all 200ms;
+
+        &:hover {
+          opacity: 1;
         }
       }
     }
