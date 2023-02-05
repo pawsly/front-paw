@@ -1,16 +1,17 @@
-@import 'layout';
-@import 'user';
+@import "mixin";
+@import "layout";
+@import "user";
 
 * {
   font-family: "Noto Sans CJK KR", Noto Sans KR, sans-serif;
   font-weight: bold;
   margin: 0;
   padding: 0;
-  box-sizing : border-box;
+  box-sizing: border-box;
 }
 
 #root {
-  background-color: #F9F7F9;
+  background-color: #f9f7f9;
   height: 100vh;
 }
 
