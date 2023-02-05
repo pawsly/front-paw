@@ -62,6 +62,7 @@
           border: 3px solid #55b80b;
           border-radius: 248px;
 
+          //TODO 위 css랑 background 빼고 겹침
           input {
             width: 100%;
             height: 55px;
@@ -92,6 +93,111 @@
 
         &:hover {
           opacity: 1;
+        }
+      }
+
+      &-tool {
+        width: 359px;
+        margin: 27px 0 21px 0;
+        display: flex;
+        justify-content: space-between;
+
+        &-save {
+          display: flex;
+          align-items: center;
+
+          &-check {
+            display: none;
+          }
+
+          &-check + label {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            border: 2px solid #55b80b;
+            cursor: pointer;
+            transition: all 200ms;
+          }
+
+          &-check:checked + label {
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            background-color: #55b80b;
+            border: 2px solid #55b80b;
+            cursor: pointer;
+
+            .check-icon {
+              display: block;
+              color: white;
+              font-size: 11px;
+            }
+          }
+
+          span {
+            margin-left: 9px;
+            font-size: 15px;
+            font-weight: normal;
+          }
+        }
+
+        &-find {
+          span {
+            font-weight: lighter;
+            color: #7f8081;
+          }
+
+          .id,
+          .passwd {
+            cursor: pointer;
+
+            &:hover {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+
+      &-login-btn {
+        width: 359px;
+        height: 59px;
+        background-color: #55b80b;
+        border: 0;
+        border-radius: 248px;
+        outline: 0;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        transition: all 200ms;
+
+        &:hover {
+          background-color: #e7f5dd;
+          border: solid 3px #55b80b;
+          color: #55b80b;
+        }
+      }
+
+      &-simple {
+        width: 359px;
+
+        &-title {
+          width: 100%;
+          margin-top: 82px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &-line {
+            width: 125px;
+            height: 1px;
+            border-bottom: 1px solid #7f8081;
+          }
+
+          span {
+            font-size: 16px;
+            font-weight: lighter;
+            color: #7f8081;
+          }
         }
       }
     }

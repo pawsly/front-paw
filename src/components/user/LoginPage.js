@@ -11,6 +11,7 @@ const Login = () => {
   const [id, setId] = useState("");
   const [emailState, setEmailState] = useState(false);
   const [passwdMode, setPasswdMode] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   // input 바깥 영역 누르면 모든 active style 해지
   const handleClickAway = (e) => {
@@ -26,6 +27,10 @@ const Login = () => {
     else setEmailState(false);
 
     setId(e.target.value);
+  };
+
+  const checkHandler = (e) => {
+    if (e.isTrusted) setChecked(!checked);
   };
 
   return (
@@ -88,6 +93,46 @@ const Login = () => {
               </div>
             </div>
           </ClickAwayListener>
+
+          <div className="login-section-box-content-tool">
+            <div className="login-section-box-content-tool-save">
+              <input
+                className="login-section-box-content-tool-save-check"
+                id="save-id"
+                type="checkbox"
+                checked={checked}
+                onChange={checkHandler}
+              />
+              <label htmlFor="save-id">
+                {checked ? (
+                  <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                ) : null}
+              </label>
+              <span>아이디 저장</span>
+            </div>
+            <div className="login-section-box-content-tool-find">
+              <span className="id">아이디</span>
+              <span> / </span>
+              <span className="passwd">비밀번호 찾기</span>
+            </div>
+          </div>
+
+          <input
+            type="button"
+            className="login-section-box-content-login-btn"
+            value="Login"
+          />
+
+          <div className="login-section-box-content-simple">
+            <div className="login-section-box-content-simple-title">
+              <div className="login-section-box-content-simple-title-line"></div>
+              <span>간편 로그인</span>
+              <div className="login-section-box-content-simple-title-line"></div>
+            </div>
+            <div className="login-section-box-content-simple-icon">
+              {/*아이콘은 sns 로그인 적용 시 다시*/}
+            </div>
+          </div>
         </div>
       </div>
     </div>
