@@ -24,7 +24,7 @@ const Login = () => {
           <span className="login-section-box-content-welcome">Welcome :)</span>
           <ClickAwayListener onClickAway={handleClickAway}>
             {/*input 영역 하나로 묶기 위한 div*/}
-            <div>
+            <div style={{ width: "359px" }}>
               <div
                 className={
                   "login-section-box-content-input" +
@@ -39,7 +39,11 @@ const Login = () => {
                 {/* TODO 정규표현식으로 아이디가 이메일 형식으로 입력됐을 경우에만 아이콘이 나타나도록 */}
                 <FontAwesomeIcon icon={faCheck} className="check-icon" />
               </div>
-
+              {/*사이 간격 클릭 시에도 active style 해지*/}
+              <div
+                className="login-section-box-content-interval"
+                onClick={() => setClickSection("")}
+              ></div>
               <div
                 className={
                   "login-section-box-content-input" +
