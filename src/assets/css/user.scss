@@ -14,27 +14,38 @@
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 
     &-tip {
-      width: 50%;
+      width: calc(100% - 571px);
       height: 100%;
-      background-color: gray;
+      padding-left: 43px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        margin-top: 33px;
+        font-size: 16px;
+        font-weight: lighter;
+        color: $disable-color;
+      }
     }
 
     &-content {
-      width: 50%;
+      width: 571px;
       padding-left: 86px;
       padding-top: 109px;
       display: flex;
       flex-direction: column;
 
       &-welcome {
-        margin-bottom: 53px;
+        margin-bottom: 91px;
         font-size: 45px;
         color: $primary-color;
       }
 
       &-input {
         width: 359px;
-        height: 59px;
+        height: 47px;
         padding: 0 22px 0 32px;
         display: flex;
         align-items: center;
@@ -43,7 +54,7 @@
 
         input {
           width: 100%;
-          height: 55px;
+          height: 100%;
           background-color: $background-color;
           border: 0;
           outline: 0;
@@ -54,7 +65,7 @@
 
         &-active {
           width: 359px;
-          height: 59px;
+          height: 47px;
           padding: 0 22px 0 32px;
           display: flex;
           align-items: center;
@@ -65,7 +76,7 @@
           //TODO 위 css랑 background 빼고 겹침
           input {
             width: 100%;
-            height: 55px;
+            height: 100%;
             background: none;
             border: 0;
             outline: 0;
@@ -78,7 +89,7 @@
 
       &-interval {
         width: 100%;
-        height: 31px;
+        height: 23px;
       }
 
       // -input인 경우랑 -input-active인 경우 모두 적용하려고 바깥으로 뺌
@@ -96,65 +107,45 @@
         }
       }
 
-      &-tool {
+      &-save {
         width: 359px;
-        margin: 27px 0 21px 0;
+        margin: 21px 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        align-items: center;
 
-        &-save {
-          display: flex;
-          align-items: center;
+        &-check {
+          display: none;
+        }
 
-          &-check {
-            display: none;
-          }
+        &-check + label {
+          width: 14px;
+          height: 14px;
+          display: inline-block;
+          border: 2px solid $primary-color;
+          cursor: pointer;
+          transition: all 200ms;
+        }
 
-          &-check + label {
-            width: 14px;
-            height: 14px;
-            display: inline-block;
-            border: 2px solid $primary-color;
-            cursor: pointer;
-            transition: all 200ms;
-          }
+        &-check:checked + label {
+          width: 14px;
+          height: 14px;
+          display: inline-block;
+          background-color: $primary-color;
+          border: 2px solid $primary-color;
+          cursor: pointer;
 
-          &-check:checked + label {
-            width: 14px;
-            height: 14px;
-            display: inline-block;
-            background-color: $primary-color;
-            border: 2px solid $primary-color;
-            cursor: pointer;
-
-            .check-icon {
-              display: block;
-              color: white;
-              font-size: 11px;
-            }
-          }
-
-          span {
-            margin-left: 9px;
-            font-size: 15px;
-            font-weight: normal;
+          .check-icon {
+            display: block;
+            color: white;
+            font-size: 11px;
           }
         }
 
-        &-find {
-          span {
-            font-weight: lighter;
-            color: $disable-color;
-          }
-
-          .id,
-          .passwd {
-            cursor: pointer;
-
-            &:hover {
-              font-weight: bold;
-            }
-          }
+        span {
+          margin-left: 9px;
+          font-size: 15px;
+          font-weight: normal;
         }
       }
 
@@ -175,12 +166,37 @@
         }
       }
 
+      &-find {
+        width: 359px;
+        margin-top: 21px;
+        display: flex;
+        justify-content: center;
+
+        span {
+          margin: 0 10px;
+          font-size: 15px;
+          font-weight: lighter;
+          color: $disable-color;
+        }
+
+        .id,
+        .passwd,
+        .signup {
+          cursor: pointer;
+          transition: all 200ms;
+
+          &:hover {
+            font-weight: bold;
+          }
+        }
+      }
+
       &-simple {
         width: 359px;
 
         &-title {
           width: 100%;
-          margin-top: 82px;
+          margin-top: 70px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -188,7 +204,7 @@
           &-line {
             width: 125px;
             height: 1px;
-            border-bottom: 1px solid $disable-color;
+            border-bottom: 1px solid #c9c9c9;
           }
 
           span {
@@ -196,6 +212,82 @@
             font-weight: lighter;
             color: $disable-color;
           }
+        }
+      }
+    }
+  }
+}
+
+.register-section {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-box {
+    position: relative;
+    width: 733px;
+    height: 786px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+
+    &-title {
+      position: absolute;
+      top: 120px;
+      left: 136px;
+      font-size: 40px;
+      color: $primary-color;
+    }
+
+    &-input {
+      width: 459px;
+      height: 59px;
+      padding: 0 22px 0 32px;
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border: 3px solid $background-color;
+      border-radius: 248px;
+
+      input {
+        width: 100%;
+        height: 55px;
+        background-color: white;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        font-weight: lighter;
+        color: #928d8d;
+      }
+
+      input[class$="id"] {
+        width: 50%;
+      }
+
+      &-active {
+        width: 459px;
+        height: 59px;
+        padding: 0 22px 0 32px;
+        display: flex;
+        align-items: center;
+        background-color: rgba(85, 184, 11, 0.14);
+        border: 3px solid $primary-color;
+        border-radius: 248px;
+
+        //TODO 위 css랑 background 빼고 겹침
+        input {
+          width: 100%;
+          height: 55px;
+          background: none;
+          border: 0;
+          outline: 0;
+          font-size: 16px;
+          font-weight: lighter;
+          color: #928d8d;
         }
       }
     }
