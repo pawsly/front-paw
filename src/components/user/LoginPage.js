@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import tipImg from "../../assets/img/tip-img1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [clickSection, setClickSection] = useState("");
   const [id, setId] = useState("");
+  const [passwd, setPasswd] = useState("");
   const [emailState, setEmailState] = useState(false);
   const [passwdMode, setPasswdMode] = useState(true);
   const [checked, setChecked] = useState(false);
@@ -29,6 +31,12 @@ const Login = () => {
     setId(e.target.value);
   };
 
+  const passwdChange = (e) => {
+    console.log(e.target.value);
+
+    setPasswd(e.target.value);
+  };
+
   const checkHandler = (e) => {
     if (e.isTrusted) setChecked(!checked);
   };
@@ -36,7 +44,10 @@ const Login = () => {
   return (
     <div className="login-section">
       <div className="login-section-box">
-        <div className="login-section-box-tip"></div>
+        <div className="login-section-box-tip">
+          <img src={tipImg} alt="first-tip img" />
+          <span>Tip 바로 보기에서 원하는 페이지를 찾을 수 있어요</span>
+        </div>
         <div className="login-section-box-content">
           <span className="login-section-box-content-welcome">Welcome :)</span>
           <ClickAwayListener onClickAway={handleClickAway}>
@@ -75,6 +86,8 @@ const Login = () => {
                   type={passwdMode ? "password" : "text"}
                   className="login-section-box-content-input-passwd"
                   onClick={() => setClickSection("passwd")}
+                  value={passwd}
+                  onChange={passwdChange}
                 />
                 {/*패스워드 표시 아이콘 조건부 할당*/}
                 {passwdMode ? (
@@ -94,27 +107,20 @@ const Login = () => {
             </div>
           </ClickAwayListener>
 
-          <div className="login-section-box-content-tool">
-            <div className="login-section-box-content-tool-save">
-              <input
-                className="login-section-box-content-tool-save-check"
-                id="save-id"
-                type="checkbox"
-                checked={checked}
-                onChange={checkHandler}
-              />
-              <label htmlFor="save-id">
-                {checked ? (
-                  <FontAwesomeIcon icon={faCheck} className="check-icon" />
-                ) : null}
-              </label>
-              <span>아이디 저장</span>
-            </div>
-            <div className="login-section-box-content-tool-find">
-              <span className="id">아이디</span>
-              <span> / </span>
-              <span className="passwd">비밀번호 찾기</span>
-            </div>
+          <div className="login-section-box-content-save">
+            <input
+              className="login-section-box-content-save-check"
+              id="save-id"
+              type="checkbox"
+              checked={checked}
+              onChange={checkHandler}
+            />
+            <label htmlFor="save-id">
+              {checked ? (
+                <FontAwesomeIcon icon={faCheck} className="check-icon" />
+              ) : null}
+            </label>
+            <span>아이디 저장</span>
           </div>
 
           <input
@@ -122,6 +128,16 @@ const Login = () => {
             className="login-section-box-content-login-btn"
             value="Login"
           />
+
+          <div className="login-section-box-content-find">
+            <span className="id">아이디 찾기</span>
+            <span>|</span>
+            <span className="passwd">비밀번호 찾기</span>
+            <span>|</span>
+            <span className="signup" onClick={() => navigate("/register")}>
+              회원가입
+            </span>
+          </div>
 
           <div className="login-section-box-content-simple">
             <div className="login-section-box-content-simple-title">
