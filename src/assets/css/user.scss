@@ -52,7 +52,8 @@
         background-color: $background-color;
         border-radius: 248px;
 
-        input {
+        input,
+        &-active input {
           width: 100%;
           height: 100%;
           background-color: $background-color;
@@ -73,16 +74,8 @@
           border: 3px solid $primary-color;
           border-radius: 248px;
 
-          //TODO 위 css랑 background 빼고 겹침
           input {
-            width: 100%;
-            height: 100%;
             background: none;
-            border: 0;
-            outline: 0;
-            font-size: 16px;
-            font-weight: lighter;
-            color: #928d8d;
           }
         }
       }
@@ -243,17 +236,22 @@
       color: $primary-color;
     }
 
-    &-input {
+    &-input,
+    &-input-id {
       width: 459px;
       height: 59px;
-      padding: 0 22px 0 32px;
       display: flex;
+    }
+
+    &-input {
+      padding: 0 22px 0 32px;
       align-items: center;
       background-color: white;
       border: 3px solid $background-color;
       border-radius: 248px;
 
-      input {
+      input,
+      &-active input {
         width: 100%;
         height: 55px;
         background-color: white;
@@ -264,8 +262,8 @@
         color: #928d8d;
       }
 
-      input[class$="id"] {
-        width: 50%;
+      input[class$="passwd"] {
+        background: none;
       }
 
       &-active {
@@ -278,17 +276,75 @@
         border: 3px solid $primary-color;
         border-radius: 248px;
 
-        //TODO 위 css랑 background 빼고 겹침
         input {
-          width: 100%;
-          height: 55px;
           background: none;
-          border: 0;
-          outline: 0;
-          font-size: 16px;
-          font-weight: lighter;
-          color: #928d8d;
         }
+      }
+    }
+
+    &-input-id,
+    &-input-id-active {
+      input {
+        width: 353px;
+        height: 100%;
+        padding: 0 22px 0 32px;
+        border: 3px solid $background-color;
+        border-radius: 248px 0 0 248px;
+        outline: 0;
+        font-weight: lighter;
+        font-size: 16px;
+        color: #928d8d;
+      }
+
+      button {
+        width: 105px;
+        height: 59px;
+        background-color: $background-color;
+        border: 0;
+        border-radius: 0 248px 248px 0;
+        outline: 0;
+        font-weight: lighter;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 200ms;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
+
+      &-active {
+        height: 59px;
+
+        input {
+          background-color: rgba(85, 184, 11, 0.14);
+          border: 3px solid $primary-color;
+        }
+      }
+    }
+
+    &-interval {
+      width: 100%;
+      height: 31px;
+    }
+
+    &-next {
+      position: absolute;
+      right: 140px;
+      bottom: 128px;
+      width: 104px;
+      height: 47px;
+      background-color: $primary-color;
+      border: 0;
+      border-radius: 248px;
+      font-size: 16px;
+      font-weight: lighter;
+      color: white;
+      cursor: pointer;
+      transition: all 200ms;
+
+      &:hover {
+        background-color: #419205;
       }
     }
   }

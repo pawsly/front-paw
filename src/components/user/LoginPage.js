@@ -62,6 +62,7 @@ const Login = () => {
                 <input
                   type="text"
                   className="login-section-box-content-input-id"
+                  placeholder="아이디"
                   onClick={() => setClickSection("id")}
                   value={id}
                   onChange={idChange}
@@ -85,6 +86,7 @@ const Login = () => {
                 <input
                   type={passwdMode ? "password" : "text"}
                   className="login-section-box-content-input-passwd"
+                  placeholder="비밀번호"
                   onClick={() => setClickSection("passwd")}
                   value={passwd}
                   onChange={passwdChange}
