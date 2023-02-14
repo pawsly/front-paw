@@ -17,6 +17,14 @@ const Register = () => {
     }
   };
 
+  const checkIdDuplication = () => {
+    //TODO 중복확인
+  };
+
+  const moreInfo = () => {
+    //TODO 추가 정보 입력
+  };
+
   return (
     <div className="register-section">
       <div className="register-section-box">
@@ -33,9 +41,9 @@ const Register = () => {
               <input
                 type="text"
                 className="register-section-box-input-name"
+                placeholder="이름"
                 onClick={() => setClickSection("name")}
                 onChange={() => setName(name)}
-                placeholder="이름"
               />
             </div>
             {/*사이 간격 클릭 시에도 active style 해지*/}
@@ -45,27 +53,41 @@ const Register = () => {
             ></div>
             <div
               className={
-                "register-section-box-input" +
+                "register-section-box-input-id" +
                 (clickSection === "id" ? "-active" : "")
               }
             >
               <input
                 type="text"
-                className="register-section-box-input-id"
+                className="register-section-box-input-id-text"
+                placeholder="아이디"
                 onClick={() => setClickSection("id")}
                 onChange={() => setId(id)}
-                placeholder="아이디"
               />
+              <button
+                className="register-section-box-input-id-check"
+                onClick={checkIdDuplication}
+              >
+                중복확인
+              </button>
             </div>
+            <div
+              className="register-section-box-interval"
+              onClick={() => setClickSection("")}
+            ></div>
             <div
               className={
                 "register-section-box-input" +
                 (clickSection === "passwd" ? "-active" : "")
               }
+              style={
+                clickSection !== "passwd" ? { backgroundColor: "#ebebeb" } : {}
+              }
             >
               <input
                 type={passwdMode ? "password" : "text"}
                 className="register-section-box-input-passwd"
+                placeholder="비밀번호"
                 onClick={() => setClickSection("passwd")}
               />
               {/*패스워드 표시 아이콘 조건부 할당*/}
@@ -83,8 +105,29 @@ const Register = () => {
                 />
               )}
             </div>
+            <div
+              className="register-section-box-interval"
+              onClick={() => setClickSection("")}
+            ></div>
+            <div
+              className={
+                "register-section-box-input" +
+                (clickSection === "passwdCheck" ? "-active" : "")
+              }
+            >
+              <input
+                type={passwdMode ? "password" : "text"}
+                className="register-section-box-input-passwd-check"
+                placeholder="비밀번호 확인"
+                onClick={() => setClickSection("passwdCheck")}
+              />
+            </div>
           </div>
         </ClickAwayListener>
+
+        <button className="register-section-box-next" onClick={moreInfo}>
+          다음
+        </button>
       </div>
     </div>
   );
