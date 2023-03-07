@@ -9,8 +9,10 @@ import ClickAwayListener from "react-click-away-listener";
 const Login = () => {
   const navigate = useNavigate();
   const [clickSection, setClickSection] = useState("");
-  const [id, setId] = useState("");
-  const [passwd, setPasswd] = useState("");
+  const [loginInfo, setLoginInfo] = useState({
+    id: "",
+    passwd: "",
+  });
   const [emailState, setEmailState] = useState(false);
   const [passwdMode, setPasswdMode] = useState(true);
   const [checked, setChecked] = useState(false);
@@ -22,19 +24,17 @@ const Login = () => {
     }
   };
 
+  const onChangeHandler = (e) => {
+    setLoginInfo({ ...loginInfo, [e.target.id]: e.target.value });
+  };
+
   const idChange = (e) => {
     const re = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
 
     if (e.target.value.match(re)) setEmailState(true);
     else setEmailState(false);
 
-    setId(e.target.value);
-  };
-
-  const passwdChange = (e) => {
-    console.log(e.target.value);
-
-    setPasswd(e.target.value);
+    onChangeHandler(e);
   };
 
   const checkHandler = (e) => {
@@ -58,16 +58,20 @@ const Login = () => {
                   "login-section-box-content-input" +
                   (clickSection === "id" ? "-active" : "")
                 }
+                style={{
+                  backgroundColor:
+                    clickSection !== "id" && loginInfo.id ? "#ebebeb" : "white",
+                }}
               >
                 <input
                   type="text"
                   className="login-section-box-content-input-id"
                   placeholder="아이디"
+                  id="id"
+                  value={loginInfo.id}
                   onClick={() => setClickSection("id")}
-                  value={id}
                   onChange={idChange}
                 />
-                {/* TODO 정규표현식으로 아이디가 이메일 형식으로 입력됐을 경우에만 아이콘이 나타나도록 */}
                 {emailState ? (
                   <FontAwesomeIcon icon={faCheck} className="check-icon" />
                 ) : null}
@@ -82,14 +86,21 @@ const Login = () => {
                   "login-section-box-content-input" +
                   (clickSection === "passwd" ? "-active" : "")
                 }
+                style={{
+                  backgroundColor:
+                    clickSection !== "passwd" && loginInfo.passwd
+                      ? "#ebebeb"
+                      : "white",
+                }}
               >
                 <input
                   type={passwdMode ? "password" : "text"}
                   className="login-section-box-content-input-passwd"
                   placeholder="비밀번호"
+                  id="passwd"
+                  value={loginInfo.passwd}
                   onClick={() => setClickSection("passwd")}
-                  value={passwd}
-                  onChange={passwdChange}
+                  onChange={onChangeHandler}
                 />
                 {/*패스워드 표시 아이콘 조건부 할당*/}
                 {passwdMode ? (
