@@ -25,7 +25,6 @@
       span {
         margin-top: 33px;
         font-size: 16px;
-        font-weight: lighter;
         color: $disable-color;
       }
     }
@@ -40,6 +39,7 @@
       &-welcome {
         margin-bottom: 91px;
         font-size: 45px;
+        font-weight: bold;
         color: $primary-color;
       }
 
@@ -65,7 +65,6 @@
           border: 0;
           outline: 0;
           font-size: 16px;
-          font-weight: lighter;
           color: #928d8d;
         }
 
@@ -145,6 +144,7 @@
         border-radius: 248px;
         outline: 0;
         font-size: 16px;
+        font-weight: bold;
         color: white;
         cursor: pointer;
         transition: all 200ms;
@@ -163,7 +163,6 @@
         span {
           margin: 0 10px;
           font-size: 15px;
-          font-weight: lighter;
           color: $disable-color;
         }
 
@@ -197,7 +196,6 @@
 
           span {
             font-size: 16px;
-            font-weight: lighter;
             color: $disable-color;
           }
         }
@@ -228,6 +226,7 @@
       top: 120px;
       left: 136px;
       font-size: 40px;
+      font-weight: bold;
       color: $primary-color;
     }
 
@@ -257,7 +256,6 @@
         border: 0;
         outline: 0;
         font-size: 16px;
-        font-weight: lighter;
         color: #928d8d;
       }
 
@@ -296,7 +294,6 @@
         border: 3px solid $background-color;
         border-radius: 248px 0 0 248px;
         outline: 0;
-        font-weight: lighter;
         font-size: 16px;
         color: #928d8d;
       }
@@ -308,7 +305,6 @@
         border: 0;
         border-radius: 0 248px 248px 0;
         outline: 0;
-        font-weight: lighter;
         font-size: 16px;
         cursor: pointer;
         transition: all 200ms;
@@ -337,23 +333,39 @@
       height: 31px;
     }
 
-    &-next {
+    &-btn {
       position: absolute;
       right: 140px;
       bottom: 128px;
-      width: 104px;
-      height: 47px;
-      background-color: $primary-color;
-      border: 0;
-      border-radius: 248px;
-      font-size: 16px;
-      font-weight: lighter;
-      color: white;
-      cursor: pointer;
-      transition: all 200ms;
+      display: flex;
 
-      &:hover {
-        background-color: #419205;
+      &-prev,
+      &-next {
+        width: 104px;
+        height: 47px;
+        border: 0;
+        border-radius: 248px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 200ms;
+      }
+
+      &-prev {
+        margin-right: 7px;
+        background-color: $background-color;
+
+        &:hover {
+          background-color: #cccccc;
+        }
+      }
+
+      &-next {
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+          background-color: #419205;
+        }
       }
     }
 
@@ -367,7 +379,6 @@
       align-items: center;
 
       > span {
-        font-weight: lighter;
         font-size: 20px;
         color: #b8b8b8;
       }
@@ -378,7 +389,6 @@
         padding: 0 22px 0 32px;
         border-radius: 248px;
         outline: 0;
-        font-weight: lighter;
         font-size: 16px;
       }
 
@@ -411,9 +421,81 @@
     &-passwd-tip {
       position: absolute;
       margin-top: 10px;
-      font-weight: lighter;
       font-size: 14px;
       color: #e00d0d;
+    }
+  }
+
+  &-success {
+    position: relative;
+    width: 1180px;
+    height: 786px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
+
+    .check-icon {
+      font-size: 123px;
+      color: $primary-color;
+      transition: font-size 400ms;
+    }
+
+    &-msg {
+      margin-top: 25px;
+      font-size: 40px;
+
+      b {
+        font-weight: bold;
+      }
+    }
+
+    &-user {
+      margin-top: 29px;
+      text-align: center;
+      font-size: 16px;
+
+      span {
+        display: block;
+      }
+    }
+
+    &-line {
+      width: 535px;
+      height: 1px;
+      margin-top: 43px;
+      background-color: #7F8081;
+    }
+
+    &-btn {
+      margin-top: 50px;
+
+      button {
+        width: 104px;
+        height: 47px;
+        border: 0;
+        border-radius: 248px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 200ms;
+      }
+
+      &-home:hover {
+          background-color: #cccccc;
+        }
+
+      &-login {
+        margin-left: 17px;
+        background-color: $primary-color;
+        color: white;
+
+        &:hover {
+          background-color: #419205;
+        }
+      }
     }
   }
 }
