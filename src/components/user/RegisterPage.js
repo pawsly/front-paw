@@ -2,19 +2,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import React, { useState } from "react";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {faCheck, faChevronDown} from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => {
-  const [first, setFirst] = useState(true);
+  const [page, setPage] = useState(0);
   const [clickSection, setClickSection] = useState("");
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
     id: "",
     passwd: "",
     email: "",
+    nickname: "",
     phone: "",
     birth: "",
-    nickname: "",
   });
   const [checkPasswd, setCheckPasswd] = useState("");
   const [passwdMode, setPasswdMode] = useState(true);
@@ -50,19 +50,42 @@ const Register = () => {
     //TODO 중복확인
   };
 
-  const moreInfo = () => {
-    setFirst(false);
-    // console.log(registerInfo);
+  const movePage = (n) => {
+    const registerInfoKey = {
+      name: '이름',
+      id: "아이디",
+      passwd: "비밀번호",
+      email: "이메일",
+      nickname: "닉네임",
+      phone: "연락처",
+      birth: "생년월일",
+    }
+
+    console.log(page)
+    if (n > 0) {
+      for (let key in registerInfo) {
+        if (n === 1 && key === 'email') break;
+        if (!registerInfo[key]) {
+          window.alert(registerInfoKey[key] + " 값이 비어 있습니다.");
+          return false;
+        } else if (!rightPasswd) {
+          window.alert("비밀번호 확인이 정상적으로 이루어지지 않았습니다.\n다시 확인해 주세요.");
+          return false;
+        }
+      }
+    }
+
+    setPage(n);
   };
 
   return (
     <div className="register-section">
-      <div className="register-section-box">
+      { page < 2 ? (<div className="register-section-box">
         <div className="register-section-box-title">회원가입</div>
         <ClickAwayListener onClickAway={handleClickAway}>
           {/*input 영역 하나로 묶기 위한 div*/}
           <div style={{ width: "459px" }}>
-            {first ? (
+            {!page ? (
               <div
                 className={
                   "register-section-box-input" +
@@ -85,7 +108,7 @@ const Register = () => {
                   onChange={onChangeHandler}
                 />
               </div>
-            ) : (
+            ) : page === 1 ? (
               <div
                 className={
                   "register-section-box-input-email" +
@@ -126,13 +149,15 @@ const Register = () => {
                   ></FontAwesomeIcon>{" "}
                 </button>
               </div>
+            ) : (
+              <></>
             )}
             {/*사이 간격 클릭 시에도 active style 해지*/}
             <div
               className="register-section-box-interval"
               onClick={() => setClickSection("")}
             ></div>
-            {first ? (
+            {!page ? (
               <div
                 className={
                   "register-section-box-input-id" +
@@ -161,7 +186,7 @@ const Register = () => {
                   중복확인
                 </button>
               </div>
-            ) : (
+            ) : page === 1 ? (
               // 중복 css 최소화하기 위해 id와 동일한 class명 사용
               <div
                 className={
@@ -191,12 +216,14 @@ const Register = () => {
                   중복확인
                 </button>
               </div>
+            ) : (
+              <></>
             )}
             <div
               className="register-section-box-interval"
               onClick={() => setClickSection("")}
             ></div>
-            {first ? (
+            {!page ? (
               <div
                 className={
                   "register-section-box-input" +
@@ -233,7 +260,7 @@ const Register = () => {
                   />
                 )}
               </div>
-            ) : (
+            ) : page === 1 ? (
               <div
                 className={
                   "register-section-box-input" +
@@ -256,12 +283,14 @@ const Register = () => {
                   onChange={onChangeHandler}
                 />
               </div>
+            ) : (
+              <></>
             )}
             <div
               className="register-section-box-interval"
               onClick={() => setClickSection("passwdCheck")}
             ></div>
-            {first ? (
+            {!page ? (
               <>
                 <div
                   className={
@@ -297,7 +326,7 @@ const Register = () => {
                   <></>
                 )}
               </>
-            ) : (
+            ) : page === 1 ? (
               <div
                 className={
                   "register-section-box-input" +
@@ -320,14 +349,46 @@ const Register = () => {
                   onChange={onChangeHandler}
                 />
               </div>
+            ) : (
+              <></>
             )}
           </div>
         </ClickAwayListener>
 
-        <button className="register-section-box-next" onClick={moreInfo}>
-          다음
-        </button>
-      </div>
+        <div className="register-section-box-btn">
+          {page === 1 ? (
+            <button
+              className="register-section-box-btn-prev"
+              onClick={() => movePage(0)}
+            >
+              이전
+            </button>
+          ) : (
+            <></>
+          )}
+          <button
+            className="register-section-box-btn-next"
+            onClick={() => movePage(!page ? 1 : 2)}
+          >
+            { !page ? '다음' : '가입하기' }
+          </button>
+        </div>
+      </div>):(<div className='register-section-success'>
+        <FontAwesomeIcon
+            icon={faCheck}
+            className="check-icon"
+        />
+        <span className='register-section-success-msg'>회원가입이 <b>완료</b>되었습니다</span>
+        <div className='register-section-success-user'>
+          <span>{registerInfo.name} 님의 가입을 축하합니다.</span>
+          <span>로그인한 후 서비스를 이용하실 수 있습니다.</span>
+        </div>
+        <div className='register-section-success-line'></div>
+        <div className='register-section-success-btn'>
+          <button className='register-section-success-btn-home'>홈으로</button>
+          <button className='register-section-success-btn-login'>로그인</button>
+        </div>
+      </div>)}
     </div>
   );
 };
