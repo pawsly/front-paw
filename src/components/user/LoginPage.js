@@ -18,27 +18,27 @@ const Login = () => {
   const [checked, setChecked] = useState(false);
 
   // input 바깥 영역 누르면 모든 active style 해지
-  const handleClickAway = (e) => {
-    if (e.isTrusted) {
+  const clickAwayHandler = (event) => {
+    if (event.isTrusted) {
       setClickSection("");
     }
   };
 
-  const onChangeHandler = (e) => {
-    setLoginInfo({ ...loginInfo, [e.target.id]: e.target.value });
+  const loginInfoChangeHandler = (event) => {
+    setLoginInfo({ ...loginInfo, [event.target.id]: event.target.value });
   };
 
-  const idChange = (e) => {
+  const idChangeHandler = (event) => {
     const re = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
 
-    if (e.target.value.match(re)) setEmailState(true);
+    if (event.target.value.match(re)) setEmailState(true);
     else setEmailState(false);
 
-    onChangeHandler(e);
+    loginInfoChangeHandler(event);
   };
 
-  const checkHandler = (e) => {
-    if (e.isTrusted) setChecked(!checked);
+  const checkHandler = (event) => {
+    if (event.isTrusted) setChecked(!checked);
   };
 
   return (
@@ -50,7 +50,7 @@ const Login = () => {
         </div>
         <div className="login-section-box-content">
           <span className="login-section-box-content-welcome">Welcome :)</span>
-          <ClickAwayListener onClickAway={handleClickAway}>
+          <ClickAwayListener onClickAway={clickAwayHandler}>
             {/*input 영역 하나로 묶기 위한 div*/}
             <div style={{ width: "359px" }}>
               <div
@@ -70,7 +70,7 @@ const Login = () => {
                   id="id"
                   value={loginInfo.id}
                   onClick={() => setClickSection("id")}
-                  onChange={idChange}
+                  onChange={idChangeHandler}
                 />
                 {emailState ? (
                   <FontAwesomeIcon icon={faCheck} className="check-icon" />
@@ -100,7 +100,7 @@ const Login = () => {
                   id="passwd"
                   value={loginInfo.passwd}
                   onClick={() => setClickSection("passwd")}
-                  onChange={onChangeHandler}
+                  onChange={loginInfoChangeHandler}
                 />
                 {/*패스워드 표시 아이콘 조건부 할당*/}
                 {passwdMode ? (
