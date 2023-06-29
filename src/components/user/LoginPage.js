@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import tipImg from "../../assets/img/tip-img1.png";
+import tipImg from "../../public/images/tip-img1.png";
+import googleIcon from "../../public/images/google-icon.png";
+import kakaoIcon from "../../public/images/kakao-icon.png";
+import naverIcon from "../../public/images/naver-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -159,7 +162,9 @@ const Login = () => {
               <div className="login-section-box-content-simple-title-line"></div>
             </div>
             <div className="login-section-box-content-simple-icon">
-              {/*아이콘은 sns 로그인 적용 시 다시*/}
+              <img src={googleIcon} alt="google-login icon" />
+              <img src={kakaoIcon} alt="kakao-login icon" />
+              <img src={naverIcon} alt="naver-login icon" />
             </div>
           </div>
         </div>
