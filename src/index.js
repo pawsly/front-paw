@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import mainLogo from "./assets/img/logo.png";
+import mainLogo from "./public/images/logo.png";
 import App from "./App";
 import Register from "./components/user/RegisterPage";
 
