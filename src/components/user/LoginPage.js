@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
+import NaverLogin from "../snsLogin/naverLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -165,6 +166,8 @@ const Login = () => {
               <img src={googleIcon} alt="google-login icon" />
               <img src={kakaoIcon} alt="kakao-login icon" />
               <img src={naverIcon} alt="naver-login icon" />
+              <NaverLogin />
+              {/*아이콘은 sns 로그인 적용 시 다시*/}
             </div>
           </div>
         </div>
