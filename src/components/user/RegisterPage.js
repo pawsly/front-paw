@@ -20,29 +20,29 @@ const Register = () => {
   const [passwdMode, setPasswdMode] = useState(true);
   const [rightPasswd, setRightPasswd] = useState(true);
 
-  const clickAwayHandler = (event) => {
-    if (event.isTrusted) {
+  const handleClickAway = (e) => {
+    if (e.isTrusted) {
       setClickSection("");
     }
   };
 
-  const registerInfoChangeHandler = (event) => {
-    if (event.target.id === "checkPasswd") {
-      setCheckPasswd(event.target.value);
-      if (registerInfo.passwd === event.target.value) {
+  const onChangeHandler = (e) => {
+    if (e.target.id === "checkPasswd") {
+      setCheckPasswd(e.target.value);
+      if (registerInfo.passwd === e.target.value) {
         setRightPasswd(true);
       } else {
         setRightPasswd(false);
       }
     } else {
-      if (event.target.id === "passwd") {
-        if (checkPasswd === event.target.value) {
+      if (e.target.id === "passwd") {
+        if (checkPasswd === e.target.value) {
           setRightPasswd(true);
         } else {
           setRightPasswd(false);
         }
       }
-      setRegisterInfo({ ...registerInfo, [event.target.id]: event.target.value });
+      setRegisterInfo({ ...registerInfo, [e.target.id]: e.target.value });
     }
   };
 
@@ -50,7 +50,7 @@ const Register = () => {
     //TODO 중복확인
   };
 
-  const movePage = (number) => {
+  const movePage = (n) => {
     const registerInfoKey = {
       name: '이름',
       id: "아이디",
@@ -61,9 +61,10 @@ const Register = () => {
       birth: "생년월일",
     }
 
-    if (number > 0) {
+    console.log(page)
+    if (n > 0) {
       for (let key in registerInfo) {
-        if (number === 1 && key === 'email') break;
+        if (n === 1 && key === 'email') break;
         if (!registerInfo[key]) {
           window.alert(registerInfoKey[key] + " 값이 비어 있습니다.");
           return false;
@@ -74,14 +75,14 @@ const Register = () => {
       }
     }
 
-    setPage(number);
+    setPage(n);
   };
 
   return (
     <div className="register-section">
       { page < 2 ? (<div className="register-section-box">
         <div className="register-section-box-title">회원가입</div>
-        <ClickAwayListener onClickAway={clickAwayHandler}>
+        <ClickAwayListener onClickAway={handleClickAway}>
           {/*input 영역 하나로 묶기 위한 div*/}
           <div style={{ width: "459px" }}>
             {!page ? (
@@ -104,7 +105,7 @@ const Register = () => {
                   id="name"
                   value={registerInfo.name}
                   onClick={() => setClickSection("name")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                 />
               </div>
             ) : page === 1 ? (
@@ -121,7 +122,7 @@ const Register = () => {
                   id="email"
                   value={registerInfo.email}
                   onClick={() => setClickSection("email")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                   style={{
                     backgroundColor:
                       clickSection !== "email" && registerInfo.email
@@ -170,7 +171,7 @@ const Register = () => {
                   id="id"
                   value={registerInfo.id}
                   onClick={() => setClickSection("id")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                   style={{
                     backgroundColor:
                       clickSection !== "id" && registerInfo.id
@@ -200,7 +201,7 @@ const Register = () => {
                   id="nickname"
                   value={registerInfo.nickname}
                   onClick={() => setClickSection("nickname")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                   style={{
                     backgroundColor:
                       clickSection !== "nickname" && registerInfo.nickname
@@ -242,7 +243,7 @@ const Register = () => {
                   id="passwd"
                   value={registerInfo.passwd}
                   onClick={() => setClickSection("passwd")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                 />
                 {/*패스워드 표시 아이콘 조건부 할당*/}
                 {passwdMode ? (
@@ -279,7 +280,7 @@ const Register = () => {
                   id="phone"
                   value={registerInfo.phone}
                   onClick={() => setClickSection("phone")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                 />
               </div>
             ) : (
@@ -314,7 +315,7 @@ const Register = () => {
                     id="checkPasswd"
                     value={checkPasswd}
                     onClick={() => setClickSection("passwdCheck")}
-                    onChange={registerInfoChangeHandler}
+                    onChange={onChangeHandler}
                   />
                 </div>
                 {checkPasswd && !rightPasswd ? (
@@ -345,7 +346,7 @@ const Register = () => {
                   id="birth"
                   value={registerInfo.birth}
                   onClick={() => setClickSection("birth")}
-                  onChange={registerInfoChangeHandler}
+                  onChange={onChangeHandler}
                 />
               </div>
             ) : (
