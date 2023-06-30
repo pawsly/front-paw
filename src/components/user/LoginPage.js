@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   const idChangeHandler = (event) => {
-    const re = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
+    const re = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
 
     if (event.target.value.match(re)) setEmailState(true);
     else setEmailState(false);

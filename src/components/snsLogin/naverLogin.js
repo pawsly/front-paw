@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import Login from "../user/LoginPage";
 
-const NaverLogin = ({ setGetToken, setUserInfo}) => {
+const NaverLogin = () => {
 
-    const { naver } = window
-    const NAVER_CLIENT_ID = 'IgkIDmIp2xU8jyG57MEv'
-    const NAVER_CALLBACK_URL = ''
+    const { naver } = window; //js 에 있는 naver 선언
+    const NAVER_CLIENT_ID = 'IgkIDmIp2xU8jyG57MEv';
+    const NAVER_CALLBACK_URL = "http://localhost:8080/login.oauth2/code/naver";
 
     const initializeNaverLogin = () => {
         const naverLogin = new naver.LoginWithNaverId({
@@ -15,25 +14,19 @@ const NaverLogin = ({ setGetToken, setUserInfo}) => {
             loginButton: { color: 'green', type: 1, height: 58},
             callbackHandle: true,
         })
-        naverLogin.init()
-
-        naverLogin.getLoginStatus(async function (status) {
-            if (status) {
-                const userid = naverLogin.user.getEmail()
-                const username = naverLogin.user.getName()
-            }
-        })
+        naverLogin.init();
     }
     const userAccessToken = () => {
-        window.location.href.includes('access_token') && getToken()
-    }
+        window.location.href.includes('access_token') && getToken();
+    };
     const getToken = () => {
-        const token = window.location.href.split('=')[1].split('&')[0]
+        const token = window.location.href.split('=')[1].split('&')[0];
+        console.log(token);
     }
     useEffect(() => {
-        initializeNaverLogin()
-        userAccessToken()
-    }, [])
+        initializeNaverLogin();
+        userAccessToken();
+    }, []);
 
     return(
         <div id="naverIdLogin" />
