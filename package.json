@@ -20,6 +20,7 @@
     "react-click-away-listener": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-kakao-login": "^2.1.1",
+    "react-naver-login": "^0.1.4",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"

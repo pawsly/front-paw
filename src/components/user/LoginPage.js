@@ -11,6 +11,7 @@ import {faCheck} from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import axios from 'axios';
 import KakaoLogin from "react-kakao-login";
+import NaverLogin from "../snsLogin/naverLogin";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -214,20 +215,18 @@ const Login = () => {
               회원가입
             </span>
                     </div>
-
-                    <div className="login-section-box-content-simple">
-                        <div className="login-section-box-content-simple-title">
-                            <div className="login-section-box-content-simple-title-line"></div>
-                            <span>간편 로그인</span>
-                            <div className="login-section-box-content-simple-title-line"></div>
-                        </div>
-                        <div className="login-section-box-content-simple-icon">
-                            <img src={googleIcon} alt="google-login icon"/>
-                            <SocialKakao/>
-                            <img src={naverIcon} alt="naver-login icon"/>
-                        </div>
-                    </div>
-                </div>
+          <div className="login-section-box-content-simple">
+            <div className="login-section-box-content-simple-title">
+              <div className="login-section-box-content-simple-title-line"></div>
+              <span>간편 로그인</span>
+              <div className="login-section-box-content-simple-title-line"></div>
+            </div>
+            <div className="login-section-box-content-simple-icon">
+              <img src={googleIcon} alt="google-login icon" />
+              <img src={kakaoIcon} alt="kakao-login icon" />
+              <SocialKakao/>
+              <img src={naverIcon} alt="naver-login icon" />
+              <NaverLogin />
             </div>
         </div>
 
