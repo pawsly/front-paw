@@ -1,40 +1,54 @@
 import Header from "./HeaderComponent";
-import mianBannerTestImg from "../../public/images/main-banner-test-img.jpg";
+import mainBannerTestImg from "../../public/images/main-banner-test-img.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCaretUp,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Main = () => {
+  const [categoryOpenState, setCategoryOpenState] = useState(false);
+  const searchCategoryList = ["전체", "제목", "내용", "작성자"];
+  const [searchCategory, setSearchCategory] = useState("전체");
+
   return (
     <div className="main-section">
       <Header />
       <div className="main-section-banner">
-        <img src={mianBannerTestImg} alt="main banner" />
-        <div className="main-section-banner-content">
-          <span className="main-section-banner-content-title">
-            [Nature/Design]
-          </span>
-          <span className="main-section-banner-content-sub">
-            자연 친화 TBL, Triple Bottom Line인 경제적 가치 창조, 환경에 대한
-            배려, 사회적 책임이 고려하는 디자인...
-          </span>
+        <img src={mainBannerTestImg} alt="main banner" />
+        <div
+          className={
+            categoryOpenState
+              ? "main-section-banner-drop-opened"
+              : "main-section-banner-drop"
+          }
+        >
+          {searchCategoryList.map((category, index) => (
+            <div
+              key={index}
+              onClick={() => {
+                setSearchCategory(category);
+              }}
+            >
+              {category}
+            </div>
+          ))}
         </div>
-      </div>
-      <div className="main-section-header">
-        <div className="main-section-header-menu">
-          <span>이웃 블로그</span>
-          <span>프롤로그</span>
-          <span>블로그</span>
-        </div>
-        <div className="main-section-header-last">
-          <span>마지막 접속일</span>
-          <span>2023-07-07 22:27:32</span>
-        </div>
-      </div>
-      <div className="main-section-body">
-        <div className="main-section-body-feed">
-          <div className="main-section-body-feed-hot"></div>
-          <div className="main-section-body-feed-new"></div>
-        </div>
-        <div className="main-section-body-category">
-          <div className="main-section-body-category-profile"></div>
+        <div className="main-section-banner-search">
+          <div className="main-section-banner-search-category">
+            <span>{searchCategory}</span>
+            <FontAwesomeIcon
+              icon={faCaretUp}
+              onClick={() => {
+                setCategoryOpenState(!categoryOpenState);
+              }}
+            />
+          </div>
+          <div className="main-section-banner-search-input">
+            <input type="text" placeholder="검색할 내용을 입력하세요." />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </div>
         </div>
       </div>
     </div>
