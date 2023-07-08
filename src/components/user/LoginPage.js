@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import tipImg from "../../public/images/tip-img1.png";
 import googleIcon from "../../public/images/google-icon.png";
 import kakaoIcon from "../../public/images/kakao-icon.png";
-import naverIcon from "../../public/images/naver-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
-import NaverLogin from "../snsLogin/naverLogin";
+import axios from "axios";
+import NaverLogin from "../snsLogin/NaverLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,6 +43,57 @@ const Login = () => {
 
   const checkHandler = (event) => {
     if (event.isTrusted) setChecked(!checked);
+  };
+
+  const handleTokenRequest = async (code) => {
+    try {
+      const response = await axios.post(
+        "https://kauth.kakao.com/oauth/token",
+        new URLSearchParams({
+          grant_type: "authorization_code",
+          redirect_uri: "http://localhost:3000",
+          code: code,
+        }).toString(),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+            // 'Authorization': `Bearer ${YOUR_ACCESS_TOKEN}`,
+          },
+        }
+      );
+      console.log(response.data); // 토큰 데이터 출력
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const KaKaoLogin = () => {
+    const handleLogin = () => {
+      const Rest_api_key = "f6076f17fb8b4843069f31828eb5182c"; // 카카오 REST API 키 입력
+      const redirect_uri = "http://localhost:3000"; // 리디렉션 URI 입력
+      const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${redirect_uri}&response_type=code`;
+
+      window.location.href = kakaoURL;
+    };
+
+    // URL에서 코드 파싱 및 토큰 요청
+    useEffect(() => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const provider = urlParams.get("provider");
+      const authorizationCode = urlParams.get("code");
+
+      if (provider === "kakao" && authorizationCode) {
+        handleTokenRequest(authorizationCode)
+          .then((response) => {
+            console.log(response.data); // 토큰 데이터 출력
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    }, []);
+
+    return <img src={kakaoIcon} alt="kakao-login icon" onClick={handleLogin} />;
   };
 
   return (
@@ -164,10 +215,8 @@ const Login = () => {
             </div>
             <div className="login-section-box-content-simple-icon">
               <img src={googleIcon} alt="google-login icon" />
-              <img src={kakaoIcon} alt="kakao-login icon" />
-              <img src={naverIcon} alt="naver-login icon" />
+              <KaKaoLogin />
               <NaverLogin />
-              {/*아이콘은 sns 로그인 적용 시 다시*/}
             </div>
           </div>
         </div>
