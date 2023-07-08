@@ -26,6 +26,10 @@ const NaverLogin =  () =>{
                 }
             });
     };
+        const naverLogout = () =>{
+            localStorage.removeItem("com.naver.nid.access_token");
+            window.location.reload();
+        };
 
         // naverLogin.init();
     // }
@@ -54,7 +58,7 @@ const NaverLogin =  () =>{
                 <div>{user.email}</div>
                 <h3>사용자 프로필 사진</h3>
                 <img src={user.profile} alt="프로필 사진"/>
-                {/*<button onClick={naverLogout}>로그아웃</button>*/}
+                <button onClick={naverLogout}>로그아웃</button>
             </div>)
         : (<div> <div id='naverIdLogin'></div></div>)
         }</div>
