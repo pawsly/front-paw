@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import mainLogo from "./public/images/logo.png";
 import App from "./App";
 import Register from "./components/user/RegisterPage";
-import Main from "./components/common/MainPage";
+import FeedMain from "./components/user/FeedMainPage";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/main",
-    element: <Main />,
+    element: <FeedMain />,
   },
 ]);
 
