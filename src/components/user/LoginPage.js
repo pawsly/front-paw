@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import tipImg from "../../public/images/tip-img1.png";
 import googleIcon from "../../public/images/google-icon.png";
 import kakaoIcon from "../../public/images/kakao-icon.png";
+import naverIcon from "../../public/images/naver-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import axios from "axios";
-import NaverLogin from "../snsLogin/naverLogin";
+import NaverLogin from "../snsLogin/NaverLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -215,6 +216,7 @@ const Login = () => {
             </div>
             <div className="login-section-box-content-simple-icon">
               <img src={googleIcon} alt="google-login icon" />
+              <img src={naverIcon} alt="naver-login icon" />
               <KaKaoLogin />
               <NaverLogin />
             </div>
