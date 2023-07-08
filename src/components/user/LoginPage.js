@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import axios from "axios";
-import NaverLogin from "../snsLogin/NaverLogin";
+import NaverLogin from "../snsLogin/naverLogin";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Login = () => {
   };
 
   const idChangeHandler = (event) => {
-    const re = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
+    const re = /^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z]+$/i;
 
     if (event.target.value.match(re)) setEmailState(true);
     else setEmailState(false);
