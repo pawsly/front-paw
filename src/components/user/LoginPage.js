@@ -8,7 +8,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import axios from "axios";
-import NaverLogin from "../snsLogin/NaverLogin";
+import NaverLogin from "../snsLogin/naverLogin";
 
 const Login = () => {
   const navigate = useNavigate();
