@@ -209,9 +209,10 @@
           justify-content: center;
 
           img {
-            margin: 14px 8px;
             width: 66px;
             height: 66px;
+            margin: 14px 8px;
+            border-radius: 50%;
             cursor: pointer;
           }
         }
@@ -483,7 +484,7 @@
       width: 535px;
       height: 1px;
       margin-top: 43px;
-      background-color: #7F8081;
+      background-color: #7f8081;
     }
 
     &-btn {
@@ -500,8 +501,8 @@
       }
 
       &-home:hover {
-          background-color: #cccccc;
-        }
+        background-color: #cccccc;
+      }
 
       &-login {
         margin-left: 17px;

@@ -216,7 +216,6 @@ const Login = () => {
             </div>
             <div className="login-section-box-content-simple-icon">
               <img src={googleIcon} alt="google-login icon" />
-              <img src={naverIcon} alt="naver-login icon" />
               <KaKaoLogin />
               <NaverLogin />
             </div>
