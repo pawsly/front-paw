@@ -24,13 +24,13 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    <span className="title">
-      <img
-        src={mainLogo}
-        alt="main Logo"
-        onClick={() => (window.location = "/")}
-      />
-    </span>
+    {/*<span className="title">*/}
+    {/*  <img*/}
+    {/*    src={mainLogo}*/}
+    {/*    alt="main Logo"*/}
+    {/*    onClick={() => (window.location = "/")}*/}
+    {/*  />*/}
+    {/*</span>*/}
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>
