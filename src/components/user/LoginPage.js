@@ -10,6 +10,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
 import axios from "axios";
 import NaverLogin from "../snsLogin/NaverLogin";
+import Header from "../common/HeaderComponent";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -99,6 +100,7 @@ const Login = () => {
 
   return (
     <div className="login-section">
+      <Header />
       <div className="login-section-box">
         <div className="login-section-box-tip">
           <img src={tipImg} alt="first-tip img" />
