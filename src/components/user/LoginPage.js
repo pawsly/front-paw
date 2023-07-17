@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import tipImg from "../../public/images/tip-img1.png";
 import googleIcon from "../../public/images/google-icon.png";
 import kakaoIcon from "../../public/images/kakao-icon.png";
-import naverIcon from "../../public/images/naver-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +10,7 @@ import ClickAwayListener from "react-click-away-listener";
 import axios from "axios";
 import NaverLogin from "../snsLogin/NaverLogin";
 import Header from "../common/HeaderComponent";
+import { apiClient } from "../utils/api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -45,6 +45,15 @@ const Login = () => {
 
   const checkHandler = (event) => {
     if (event.isTrusted) setChecked(!checked);
+  };
+
+  const doLogin = () => async () => {
+    let data = {
+      id: "김성미",
+      password: "",
+    };
+    const res = await apiClient("/user/login", data);
+    console.log(`status: ${res.status}`);
   };
 
   const handleTokenRequest = async (code) => {
@@ -198,6 +207,7 @@ const Login = () => {
             type="button"
             className="login-section-box-content-login-btn"
             value="Login"
+            onClick={doLogin()}
           />
 
           <div className="login-section-box-content-find">

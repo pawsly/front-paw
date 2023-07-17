@@ -5,14 +5,14 @@ import { useLocation } from "react-router-dom";
 const NaverLogin = () => {
   const { naver } = window; //js 에 있는 naver 선언
   // const NAVER_CLIENT_ID = "lgklDmIp2xU8jyG57MEv";
-  // const NAVER_CALLBACK_URL = "http://localhost:8080/login.oauth2/code/naver";
+  // const NAVER_CALLBACK_URL = "http://localhost:8080/user/naver";
   const [user, setUser] = useState(null);
   const location = useLocation();
 
   const initializeNaverLogin = () => {
     const naverLogin = new naver.LoginWithNaverId({
       clientId: "lgklDmIp2xU8jyG57MEv",
-      callbackUrl: "http://localhost:8080/login.oauth2/code/naver",
+      callbackUrl: "http://localhost:8080/user/naver",
       isPopup: false,
       loginButton: { color: "green", type: 1, height: 58 },
     });
