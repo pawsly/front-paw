@@ -4,20 +4,51 @@
   left: 40px;
   font-size: 24px;
   color: #55b80b;
-  cursor: pointer;
 }
 
 .header-section {
   width: 100%;
   height: 117px;
-  padding: 0 297px 0 190px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  &-title {
+    cursor: pointer;
+  }
+
   &-item {
     width: auto;
     display: flex;
+
+    button {
+      width: 104px;
+      height: 47px;
+      border-radius: 248px;
+      border: 0;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 300ms;
+    }
+
+    .back-btn {
+      background-color: $background-color;
+    }
+
+    .save-btn {
+      margin-left: 19px;
+      background-color: #d9d9d9;
+    }
+
+    .publish-btn {
+      margin-left: 17px;
+      background-color: $primary-color;
+      color: white;
+
+      &:hover {
+        background-color: #419205;
+      }
+    }
 
     &-profile {
       background-color: #cccccc;
@@ -61,18 +92,19 @@
   }
 
   .profile-menu {
+    overflow: hidden;
     position: absolute;
     z-index: 10;
     top: 81px;
     right: 297px;
     width: 303px;
-    height: 272px;
-    padding: 27px 0 21px 24px;
+    height: auto;
     background-color: white;
     border-radius: 20px;
     box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.25);
 
     &-user {
+      margin: 27px 0 0 24px;
       display: flex;
 
       &-img {
@@ -115,15 +147,12 @@
     &-item {
       width: 100%;
       height: auto;
-      margin-top: 36px;
-
-      &-account {
-        margin-bottom: 30px;
-      }
+      margin-top: 16px;
 
       &-account,
       &-help,
       &-logout {
+        height: 56px;
         display: flex;
         align-items: center;
         cursor: pointer;
@@ -131,18 +160,22 @@
         > svg {
           width: 20px;
           height: 20px;
+          margin-left: 24px;
         }
 
         > span {
           margin-left: 28px;
           font-size: 16px;
         }
+
+        &:hover {
+          background-color: $background-color;
+        }
       }
 
       .sap {
-        width: calc(100% + 24px);
+        width: 100%;
         height: 1px;
-        margin: 22px -24px;
         background-color: #d9d9d9;
       }
     }
