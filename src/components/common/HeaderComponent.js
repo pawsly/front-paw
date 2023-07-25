@@ -8,12 +8,13 @@ import {
   faPowerOff,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import mainLogo from "../../public/images/logo.png";
 import React, { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
 const Header = () => {
+  const navigate = useNavigate();
   const path = useLocation().pathname;
   const [profileState, setProfileState] = useState(false);
 
@@ -24,7 +25,7 @@ const Header = () => {
   };
 
   const doLogout = () => {
-    window.location = "/";
+    navigate("/");
   };
 
   return (
@@ -37,15 +38,13 @@ const Header = () => {
       }
     >
       <span className={path === "/" ? "title" : "header-section-title"}>
-        <img
-          src={mainLogo}
-          alt="main Logo"
-          onClick={() => (window.location = "/")}
-        />
+        <img src={mainLogo} alt="main Logo" onClick={() => navigate("/")} />
       </span>
       {path === "/write" ? (
         <div className="header-section-item">
-          <button className="back-btn">뒤로가기</button>
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            뒤로가기
+          </button>
           <button className="save-btn">저장</button>
           <button className="publish-btn">발행</button>
         </div>
@@ -55,7 +54,10 @@ const Header = () => {
             <div className="header-section-item-etc">
               <FontAwesomeIcon icon={faEllipsis} className="more-icon" />
             </div>
-            <div className="header-section-item-write">
+            <div
+              className="header-section-item-write"
+              onClick={() => navigate("/write")}
+            >
               <FontAwesomeIcon icon={faPencil} className="write-icon" />
             </div>
             <div className="header-section-item-setting">
@@ -77,7 +79,10 @@ const Header = () => {
         <ClickAwayListener onClickAway={clickAwayHandler}>
           <div className="profile-menu">
             <div className="profile-menu-user">
-              <div className="profile-menu-user-img">
+              <div
+                className="profile-menu-user-img"
+                onClick={() => navigate("/personal")}
+              >
                 <FontAwesomeIcon icon={faUser} className="alert-icon" />
               </div>
               <div className="profile-menu-user-info">
