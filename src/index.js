@@ -5,6 +5,7 @@ import App from "./App";
 import Register from "./components/user/RegisterPage";
 import Main from "./components/common/MainPage";
 import Write from "./components/board/WritePage";
+import PersonalFeed from "./components/user/PersonalFeedPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/main",
     element: <Main />,
+  },
+  {
+    path: "/personal",
+    element: <PersonalFeed />,
   },
   {
     path: "/write",
