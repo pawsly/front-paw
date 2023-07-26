@@ -52,8 +52,9 @@ const Login = () => {
       id: "김성미",
       password: "",
     };
-    const res = await apiClient("/user/login", data);
-    console.log(`status: ${res.status}`);
+    // const res = await apiClient("/user/login", data);
+    console.log(data);
+    // console.log(`status: ${res.status}`);
   };
 
   const handleTokenRequest = async (code) => {
