@@ -32,17 +32,16 @@ axiosInstance.interceptors.response.use(
 );
 
 export const apiClient = async (url: string, data: string) => {
-  try {
-    const res = await axiosInstance.post(`${baseURL}` + url, data);
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      // 실제 서버에서 에러 응답이 오는 경우
-      return Promise.reject(new Error("Server returned an error."));
-    }
-  } catch (error) {
-    // 요청 자체가 실패하는 경우 (네트워크 오류 등)
-    console.log("Request failed:", error);
-    return Promise.reject(error);
-  }
+  return await axiosInstance
+    .post(url, data)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return undefined;
+      }
+    })
+    .catch((res) => {
+      console.log(res);
+    });
 };

@@ -47,14 +47,13 @@ const Login = () => {
     if (event.isTrusted) setChecked(!checked);
   };
 
-  const doLogin = () => async () => {
+  const doLogin = async () => {
     let data = {
-      id: "김성미",
-      password: "",
+      id: loginInfo.id,
+      password: loginInfo.passwd,
     };
-    // const res = await apiClient("/user/login", data);
+    const res = await apiClient("/user/login", data);
     console.log(data);
-    // console.log(`status: ${res.status}`);
   };
 
   const handleTokenRequest = async (code) => {
@@ -208,7 +207,7 @@ const Login = () => {
             type="button"
             className="login-section-box-content-login-btn"
             value="Login"
-            onClick={doLogin()}
+            onClick={doLogin}
           />
 
           <div className="login-section-box-content-find">
