@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const baseURL = "http://3.35.37.177:8080";
+const baseURL = "http://3.39.25.7:8080";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
-  timeout: 30000,
-  headers: { "Contents-Type": "application/json" },
+  timeout: 1000 * 60 * 3,
+  headers: { "Content-Type": "application/json" },
 });
 
 axiosInstance.interceptors.request.use(
@@ -22,11 +22,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log({ response });
-    console.log("히히..");
     return response;
   },
   (error) => {
-    console.log({ error });
     return Promise.reject(error);
   }
 );
@@ -41,7 +39,7 @@ export const apiClient = async (url: string, data: string) => {
         return undefined;
       }
     })
-    .catch((res) => {
-      console.log(res);
+    .catch((e) => {
+      console.error(e);
     });
 };

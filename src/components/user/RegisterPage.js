@@ -4,6 +4,7 @@ import ClickAwayListener from "react-click-away-listener";
 import React, { useState } from "react";
 import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { apiClient } from "../utils/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -50,6 +51,20 @@ const Register = () => {
 
   const checkIdDuplication = () => {
     //TODO 중복확인
+  };
+
+  const doSign = async () => {
+    let data = {
+      name: registerInfo.name,
+      userid: registerInfo.id,
+      password: registerInfo.passwd,
+      email: registerInfo.email,
+      nickname: registerInfo.nickname,
+      phone: registerInfo.phone,
+      birth: registerInfo.birth,
+    };
+    const res = await apiClient("/user/signup", data);
+    console.log(data);
   };
 
   const movePage = (n) => {
@@ -373,7 +388,13 @@ const Register = () => {
             )}
             <button
               className="register-section-box-btn-next"
-              onClick={() => movePage(!page ? 1 : 2)}
+              onClick={() => {
+                if (!page) {
+                  movePage(1);
+                } else {
+                  doSign();
+                }
+              }}
             >
               {!page ? "다음" : "가입하기"}
             </button>

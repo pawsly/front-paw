@@ -49,7 +49,7 @@ const Login = () => {
 
   const doLogin = async () => {
     let data = {
-      id: loginInfo.id,
+      userid: loginInfo.id,
       password: loginInfo.passwd,
     };
     const res = await apiClient("/user/login", data);
