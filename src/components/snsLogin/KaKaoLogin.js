@@ -33,7 +33,7 @@ const KakaoLogin = () => {
     const [user, setUser] = useState(null);
 
     const LoginHandler = () => {
-        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&callbackUrl=${callbackUrl}&response_type=code`;
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${callbackUrl}&response_type=code`;
     };
 
     useEffect(() => {
