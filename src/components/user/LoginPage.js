@@ -53,6 +53,11 @@ const Login = () => {
       password: loginInfo.passwd,
     };
     const res = await apiClient("/user/login", data);
+    if (res) {
+      if (res.status === 200) {
+        window.alert("로그인에 성공하셨습니다.");
+      }
+    }
     console.log(data);
   };
 
