@@ -10,13 +10,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import mainLogo from "../../public/images/logo.png";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
 const Header = () => {
   const navigate = useNavigate();
   const path = useLocation().pathname;
   const [profileState, setProfileState] = useState(false);
+  const [userData, setUserData] = useState("");
 
   const clickAwayHandler = (event) => {
     if (event.isTrusted) {
@@ -25,8 +26,25 @@ const Header = () => {
   };
 
   const doLogout = () => {
+    localStorage.removeItem("userData");
     navigate("/");
   };
+
+  const handleLogoClick = () => {
+    const localStorageInfo = localStorage.getItem("userData");
+    if (localStorageInfo) {
+      navigate("/main");
+    } else {
+      navigate("/");
+    }
+  };
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userData");
+
+    if (userInfo) {
+      setUserData(JSON.parse(userInfo));
+    }
+  }, []); // 의존성 배열이 빈 배열인 경우, 처음 마운트될 때 한 번만 실행
 
   return (
     <div
@@ -38,7 +56,7 @@ const Header = () => {
       }
     >
       <span className={path === "/" ? "title" : "header-section-title"}>
-        <img src={mainLogo} alt="main Logo" onClick={() => navigate("/")} />
+        <img src={mainLogo} alt="main Logo" onClick={handleLogoClick} />
       </span>
       {path === "/write" ? (
         <div className="header-section-item">
@@ -86,8 +104,8 @@ const Header = () => {
                 <FontAwesomeIcon icon={faUser} className="alert-icon" />
               </div>
               <div className="profile-menu-user-info">
-                <span className="id">John Gnabry</span>
-                <span className="nick">JohnG_7117</span>
+                <span className="id">{userData.userid}</span>
+                <span className="nick">닉네임</span>
               </div>
             </div>
             <div className="profile-menu-item">

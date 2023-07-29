@@ -55,10 +55,12 @@ const Login = () => {
     const res = await apiClient("/user/login", data);
     if (res) {
       if (res.status === 200) {
+        console.log(res.config.data); //id, pw
+        localStorage.setItem("userData", res.config.data);
         window.alert("로그인에 성공하셨습니다.");
+        navigate("/main");
       }
     }
-    console.log(data);
   };
 
   const handleTokenRequest = async (code) => {

@@ -21,7 +21,6 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (config) => {
-    console.log(config);
     return config;
   },
   (error) => {
@@ -34,8 +33,7 @@ export const apiClient = async (url: string, data: string) => {
     .post(url, data)
     .then((res) => {
       if (res.status === 200) {
-        console.log(`data: ${res.status}`);
-        return res.data;
+        return res;
       } else {
         return undefined;
       }

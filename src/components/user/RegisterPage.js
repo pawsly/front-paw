@@ -64,14 +64,13 @@ const Register = () => {
       birth: registerInfo.birth,
     };
     const res = await apiClient("/user/signup", data);
-    console.log(res);
-    console.log(res.status);
-    console.log(res.data);
-    if (res.status === 200) {
-      console.log("이동하기");
-      navigate("/");
-    } else {
-      window.alert("이미 가입된 아이디입니다.");
+    if (res) {
+      if (res.status === 200) {
+        console.log(res);
+        navigate("/");
+      } else {
+        window.alert("이미 가입된 아이디입니다.");
+      }
     }
   };
 
