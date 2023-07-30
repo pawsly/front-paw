@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBell,
   faCircleExclamation,
   faEllipsis,
   faGear,
+  faHouse,
   faPencil,
   faPowerOff,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import mainLogo from "../../public/images/logo.png";
+import testLogo from "../../public/images/test-logo.png";
 import React, { useEffect, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
@@ -38,6 +39,7 @@ const Header = () => {
       navigate("/");
     }
   };
+
   useEffect(() => {
     const userInfo = localStorage.getItem("userData");
 
@@ -49,14 +51,37 @@ const Header = () => {
   return (
     <div
       className={path === "/" ? "" : "header-section"}
-      style={
-        path === "/write"
-          ? { backgroundColor: "white", padding: "0 34px 0 190px" }
-          : { padding: "0 297px 0 190px" }
-      }
+      style={{
+        backgroundColor:
+          path === "/write"
+            ? "white"
+            : path.split("/")[1] === "setting"
+            ? "none"
+            : "",
+        padding:
+          path === "/write"
+            ? "0 34px 0 190px"
+            : path.split("/")[1] === "setting"
+            ? "0 189px 0 190px"
+            : "0 297px 0 190px",
+      }}
     >
       <span className={path === "/" ? "title" : "header-section-title"}>
-        <img src={mainLogo} alt="main Logo" onClick={handleLogoClick} />
+        {path.split("/")[1] === "setting" ? (
+          <img
+            src={testLogo}
+            className="white-logo"
+            alt="white logo"
+            onClick={handleLogoClick}
+          />
+        ) : (
+          <img
+            src={mainLogo}
+            className="main-logo"
+            alt="main Logo"
+            onClick={handleLogoClick}
+          />
+        )}
       </span>
       {path === "/write" ? (
         <div className="header-section-item">
@@ -81,8 +106,13 @@ const Header = () => {
             <div className="header-section-item-setting">
               <FontAwesomeIcon icon={faGear} className="setting-icon" />
             </div>
-            <div className="header-section-item-alert">
-              <FontAwesomeIcon icon={faBell} className="alert-icon" />
+            <div
+              className="header-section-item-home"
+              onClick={() => {
+                navigate("/personal/" + userData.userid);
+              }}
+            >
+              <FontAwesomeIcon icon={faHouse} className="home-icon" />
             </div>
             <div
               className="header-section-item-profile"
@@ -95,11 +125,21 @@ const Header = () => {
       )}
       {profileState && (
         <ClickAwayListener onClickAway={clickAwayHandler}>
-          <div className="profile-menu">
+          <div
+            className="profile-menu"
+            style={{
+              right:
+                path === "/write"
+                  ? "34px"
+                  : path.split("/")[1] === "setting"
+                  ? "189px"
+                  : "297px",
+            }}
+          >
             <div className="profile-menu-user">
               <div
                 className="profile-menu-user-img"
-                onClick={() => navigate("/personal")}
+                onClick={() => navigate("/myfeed/" + userData.userid)}
               >
                 <FontAwesomeIcon icon={faUser} className="alert-icon" />
               </div>
@@ -109,7 +149,10 @@ const Header = () => {
               </div>
             </div>
             <div className="profile-menu-item">
-              <div className="profile-menu-item-account">
+              <div
+                className="profile-menu-item-account"
+                onClick={() => navigate("/setting/" + userData.userid)}
+              >
                 <FontAwesomeIcon icon={faUser} className="account-icon" />
                 <span>계정 관리</span>
               </div>
