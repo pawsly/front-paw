@@ -105,7 +105,7 @@ const Header = () => {
               </div>
               <div className="profile-menu-user-info">
                 <span className="id">{userData.userid}</span>
-                <span className="nick">닉네임</span>
+                <span className="nick">{userData.nickname}</span>
               </div>
             </div>
             <div className="profile-menu-item">
