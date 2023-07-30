@@ -15,6 +15,7 @@ const Register = () => {
     id: "",
     passwd: "",
     email: "",
+    domain: "",
     nickname: "",
     phone: "",
     birth: "",
@@ -58,7 +59,7 @@ const Register = () => {
       name: registerInfo.name,
       userid: registerInfo.id,
       password: registerInfo.passwd,
-      email: registerInfo.email,
+      email: registerInfo.email + "@" + registerInfo.domain,
       nickname: registerInfo.nickname,
       phone: registerInfo.phone,
       birth: registerInfo.birth,
@@ -80,6 +81,7 @@ const Register = () => {
       id: "아이디",
       passwd: "비밀번호",
       email: "이메일",
+      domain: "도메인",
       nickname: "닉네임",
       phone: "연락처",
       birth: "생년월일",
@@ -161,7 +163,10 @@ const Register = () => {
                   <input
                     type="text"
                     className="register-section-box-input-email-domain"
+                    id="domain"
+                    value={registerInfo.domain}
                     onClick={() => setClickSection("email")}
+                    onChange={onChangeHandler}
                     style={{
                       backgroundColor:
                         clickSection !== "email" && registerInfo.email
