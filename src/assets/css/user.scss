@@ -630,3 +630,171 @@
     }
   }
 }
+
+.set-section {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  background-color: #f5f5f5;
+
+  &-circle {
+    position: absolute;
+    top: -215px;
+    left: -518px;
+    width: 1919px;
+    height: 2401px;
+    background: linear-gradient(#58a91c, rgba(150, 224, 132, 0));
+    border-radius: 50%;
+
+    div {
+      position: absolute;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    &-profile {
+      top: 603px;
+      right: 575px;
+      width: 608px;
+      height: 607px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      border: solid 10px $primary-color;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    &-camera {
+      top: 1078px;
+      right: 612px;
+      width: 94px;
+      height: 94px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $primary-color;
+      border-radius: 50%;
+
+      > svg {
+        width: 55px;
+        height: 50px;
+        color: black;
+      }
+    }
+
+    &-nickname,
+    &-id,
+    &-info {
+      width: 264px;
+      height: 257px;
+      background-color: white;
+      border: solid 4px $primary-color;
+      border-radius: 50%;
+
+      .label {
+        position: absolute;
+        margin-top: -10px;
+        font-size: 20px;
+      }
+
+      &-input {
+        width: 181px;
+        height: 129px;
+        margin: 27px 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: solid 4px $primary-color;
+        border-radius: 69px;
+        font-size: 20px;
+      }
+    }
+
+    &-nickname {
+      top: 381px;
+      right: 484px;
+    }
+
+    &-id {
+      top: 638px;
+      right: 241px;
+    }
+
+    &-info {
+      top: 972px;
+      right: 145px;
+    }
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 129px;
+    left: 54px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    > svg {
+      width: 17px;
+      height: 17px;
+      color: white;
+    }
+
+    > span {
+      font-size: 16px;
+      color: white;
+    }
+  }
+
+  .edit-btn {
+    position: absolute;
+    top: 471px;
+    right: 130px;
+    width: 181px;
+    height: 59px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: solid 4px $primary-color;
+    border-radius: 69px;
+    cursor: pointer;
+    transition: all 200ms;
+
+    > svg {
+      width: 26px;
+      height: 23px;
+      color: $primary-color;
+    }
+
+    > span {
+      margin-left: 12px;
+      font-size: 20px;
+      color: $primary-color;
+    }
+
+    &:hover {
+      border: solid 4px #419205;
+    }
+  }
+
+  &-last {
+    position: absolute;
+    bottom: 22px;
+    right: 26px;
+    width: 293px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $disable-color;
+
+    .label {
+      font-size: 15px;
+    }
+
+    .item {
+      font-size: 16px;
+    }
+  }
+}

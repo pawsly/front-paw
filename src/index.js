@@ -7,6 +7,8 @@ import Main from "./components/common/MainPage";
 import Write from "./components/board/WritePage";
 import PersonalFeed from "./components/user/PersonalFeedPage";
 import LoginPage from "./components/user/LoginPage";
+import MyFeed from "./components/user/MyFeedPage";
+import SetProfile from "./components/user/SetProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +28,16 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: "/personal",
+    path: "/personal/:userKey",
     element: <PersonalFeed />,
+  },
+  {
+    path: "/myfeed/:userKey",
+    element: <MyFeed />,
+  },
+  {
+    path: "/setting/:userKey",
+    element: <SetProfile />,
   },
   {
     path: "/write",

@@ -7,6 +7,8 @@
 }
 
 .header-section {
+  position: relative;
+  z-index: 13;
   width: 100%;
   height: 117px;
   display: flex;
@@ -15,6 +17,13 @@
 
   &-title {
     cursor: pointer;
+
+    .white-logo {
+      position: absolute;
+      width: 150px;
+      top: 24px;
+      left: 177px;
+    }
   }
 
   &-item {
@@ -115,6 +124,7 @@
         align-items: center;
         background-color: #cccccc;
         border-radius: 50%;
+        cursor: pointer;
 
         svg {
           width: 30px;
