@@ -1,8 +1,13 @@
 import Header from "../common/HeaderComponent";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import myFeedImg from "../../public/images/my-feed-img.jpg";
+import {
+  faBars,
+  faChartSimple,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import parkImg from "../../public/images/park-img.png";
+import dudImg from "../../public/images/dud-img.jpg";
 
 const MyFeed = () => {
   const [userData, setUserData] = useState("");
@@ -14,7 +19,6 @@ const MyFeed = () => {
     "모르면 후회하는 친환경 실내디자인 사례와 진행 방향",
     "2023 디자인페스티벌, 아기자기 악세서리로 재탄생하다",
     "2023년 떠오르고 있는 신예 작가 전시전, 특전 정보 공유",
-    "이건 스크롤 테스트용",
   ];
 
   useEffect(() => {
@@ -33,6 +37,33 @@ const MyFeed = () => {
         className="category"
         onClick={() => setOpenState(true)}
       />
+      <div
+        className={
+          openState
+            ? "my-section-category-opened"
+            : "my-section-category-closed"
+        }
+      >
+        <div className="my-section-category-opened-header">
+          <div
+            className="my-section-category-opened-header-icon"
+            onClick={() => setOpenState(false)}
+          >
+            <FontAwesomeIcon icon={faChartSimple} />
+          </div>
+          <div className="my-section-category-opened-header-menu"></div>
+        </div>
+        <div className="my-section-category-opened-body">
+          <div className="my-section-category-opened-body-first"></div>
+          <div className="my-section-category-opened-body-second"></div>
+          <div className="my-section-category-opened-body-third"></div>
+        </div>
+        <div className="my-section-category-opened-footer">
+          <div className="my-section-category-opened-footer-delete"></div>
+          <div className="my-section-category-opened-footer-create"></div>
+          <div className="my-section-category-opened-footer-edit"></div>
+        </div>
+      </div>
 
       <span className="sub">3D Max모델링 디자인 스터디</span>
       <span className="main">{userData.nickname}의 글</span>
@@ -45,9 +76,12 @@ const MyFeed = () => {
       <div className="my-section-list">
         <div className="my-section-list-sort">최신글</div>
         {boardList.map((board, index) => (
-          <div className="my-section-list-item">
+          <div key={index} className="my-section-list-item">
             <div className="my-section-list-item-img">
-              <img src={myFeedImg} alt="test img" />
+              <img
+                src={userData.userid === "parkgun" ? parkImg : dudImg}
+                alt="test img"
+              />
             </div>
             <div className="my-section-list-item-title">{board}</div>
           </div>
