@@ -643,6 +643,7 @@
   }
 
   .category {
+    z-index: 13;
     position: absolute;
     top: 133px;
     left: 21px;
@@ -653,6 +654,81 @@
 
     &:hover {
       color: #419205;
+    }
+  }
+
+  &-category {
+    &-closed {
+      opacity: 0;
+      position: absolute;
+      top: 117px;
+      left: 0;
+      transform: translateX(-400%);
+      width: auto;
+      height: calc(100% - 117px);
+      transition: all 500ms;
+    }
+
+    &-opened {
+      z-index: 14;
+      position: absolute;
+      top: 117px;
+      left: 0;
+      width: auto;
+      height: calc(100% - 117px);
+      display: flex;
+      flex-direction: column;
+      background-color: #ebebeb;
+      transition: all 500ms;
+
+      &-header {
+        width: 100%;
+        height: 87px;
+        border-bottom: solid 3px #d9d9d9;
+
+        &-icon {
+          width: 80px;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-right: solid 3px #d9d9d9;
+
+          > svg {
+            width: 42px;
+            height: 38px;
+            color: $primary-color;
+          }
+        }
+      }
+
+      &-body {
+        height: calc(100% - 87px);
+        display: flex;
+
+        &-first,
+        &-second {
+          border-right: solid 3px #d9d9d9;
+        }
+
+        &-first {
+          width: 80px;
+        }
+
+        &-second {
+          width: 190px;
+        }
+
+        &-third {
+          width: 198px;
+        }
+      }
+
+      &-footer {
+        width: auto;
+        height: 78px;
+        border-top: solid 3px #d9d9d9;
+      }
     }
   }
 
@@ -698,9 +774,8 @@
   }
 
   &-list {
-    overflow: scroll;
     width: calc(801px + 36px);
-    height: 780px;
+    height: auto;
     margin-top: 75px;
 
     &-sort {
@@ -717,10 +792,11 @@
       align-items: center;
       justify-content: center;
       float: left;
+      cursor: pointer;
 
       &-img {
         overflow: hidden;
-        width: 100%;
+        width: 242px;
         height: 241px;
         display: flex;
         justify-content: center;
@@ -730,6 +806,7 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: all 300ms;
         }
       }
 
@@ -737,6 +814,13 @@
         margin: 17px 0 27px 0;
         width: 100%;
         font-size: 22px;
+      }
+
+      &:hover {
+        img {
+          width: 110%;
+          height: 110%;
+        }
       }
     }
   }
