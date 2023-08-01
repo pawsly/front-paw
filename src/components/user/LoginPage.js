@@ -59,7 +59,13 @@ const Login = () => {
         localStorage.setItem("userData", JSONData);
         window.alert("로그인에 성공하셨습니다.");
         navigate("/main");
+      } else {
+        window.alert("로그인에 실패하셨습니다.");
+        return false;
       }
+    } else {
+      window.alert("로그인에 실패하셨습니다.");
+      return false;
     }
   };
 

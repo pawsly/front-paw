@@ -67,21 +67,12 @@ const Header = () => {
       }}
     >
       <span className={path === "/" ? "title" : "header-section-title"}>
-        {path.split("/")[1] === "setting" ? (
-          <img
-            src={testLogo}
-            className="white-logo"
-            alt="white logo"
-            onClick={handleLogoClick}
-          />
-        ) : (
-          <img
-            src={mainLogo}
-            className="main-logo"
-            alt="main Logo"
-            onClick={handleLogoClick}
-          />
-        )}
+        <img
+          src={mainLogo}
+          className="main-logo"
+          alt="main Logo"
+          onClick={handleLogoClick}
+        />
       </span>
       {path === "/write" ? (
         <div className="header-section-item">

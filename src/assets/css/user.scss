@@ -637,19 +637,18 @@
   height: 100vh;
   background-color: #f5f5f5;
 
-  &-circle {
+  &-circle,
+  &-circle-edit {
+    > div {
+      position: absolute;
+    }
+
     position: absolute;
     top: -215px;
     left: -518px;
     width: 1919px;
     height: 2401px;
-    background: linear-gradient(#58a91c, rgba(150, 224, 132, 0));
     border-radius: 50%;
-
-    div {
-      position: absolute;
-      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    }
 
     &-profile {
       top: 603px;
@@ -662,6 +661,7 @@
       background-color: white;
       border: solid 10px $primary-color;
       border-radius: 50%;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
       font-size: 20px;
     }
 
@@ -681,6 +681,15 @@
         height: 50px;
         color: black;
       }
+    }
+  }
+
+  &-circle {
+    background: linear-gradient(#58a91c, rgba(150, 224, 132, 0));
+
+    div {
+      position: absolute;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     }
 
     &-nickname,
@@ -727,6 +736,62 @@
     }
   }
 
+  &-circle-edit {
+    background: linear-gradient(white, rgba(150, 224, 132, 0));
+
+    &-nickname,
+    &-id,
+    &-info {
+      right: 173px;
+      width: 287px;
+      height: 105px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .label {
+        font-size: 20px;
+        color: $sub-color;
+      }
+
+      &-input {
+        width: 100%;
+        height: 58px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border-radius: 297px;
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+        input {
+          width: 90%;
+          height: 50px;
+          border: 0;
+          outline: 0;
+          font-size: 20px;
+          color: black;
+
+          &::placeholder {
+            color: black;
+          }
+        }
+      }
+    }
+
+    &-nickname {
+      top: 642px;
+    }
+
+    &-id {
+      top: 788px;
+    }
+
+    &-info {
+      top: 936px;
+    }
+  }
+
   .back-btn {
     position: absolute;
     top: 129px;
@@ -738,12 +803,54 @@
     > svg {
       width: 17px;
       height: 17px;
-      color: white;
     }
 
     > span {
       font-size: 16px;
+    }
+  }
+
+  .edit-title {
+    position: absolute;
+    top: 120px;
+    left: 189px;
+    font-size: 30px;
+    color: $primary-color;
+  }
+
+  &-button {
+    position: absolute;
+    top: 471px;
+    right: 21px;
+    display: flex;
+
+    button {
+      width: 181px;
+      height: 58px;
+      border-radius: 69px;
+      font-size: 20px;
+      transition: all 200ms;
+    }
+
+    .save-btn {
+      background-color: $primary-color;
+      border: 0;
       color: white;
+
+      &:hover {
+        background-color: #419205;
+      }
+    }
+
+    .cancel-btn {
+      margin-left: 17px;
+      background-color: white;
+      border: solid 4px $primary-color;
+      color: $primary-color;
+
+      &:hover {
+        border: solid 4px #419205;
+      }
     }
   }
 
