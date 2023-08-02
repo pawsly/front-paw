@@ -73,9 +73,35 @@
     &-profile {
       width: 237px;
       height: 460px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: 21px 0 0 101px;
       background-color: white;
       border-radius: 30px;
+      &-border{
+        margin-top:30px;
+        padding: 2px;
+        width: 114px;
+        height: 114px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border: solid 4px $primary-color;
+        border-radius: 50%;
+        &-img{
+          width: 100px;
+          height: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: solid 1px black;
+          border-radius: 50%;
+          font-size: 14px;
+          text-align: center;
+        }
+      }
     }
   }
 }
