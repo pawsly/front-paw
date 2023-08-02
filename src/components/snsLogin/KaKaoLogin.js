@@ -3,8 +3,8 @@ import axios from 'axios';
 import kakaoIcon from '../../public/images/kakao-icon.png';
 
 const KakaoLogin = () => {
-    const Rest_api_key = 'f6076f17fb8b4843069f31828eb5182c'; // 카카오 REST API 키 입력
-    const callbackUrl = 'http://localhost:8080/app/users/kakao'; // 리디렉션 URI 입력
+    const clientId = 'a169979f19f8c09026726e9a57fc3eb2'; // 카카오 REST API 키 입력
+    const callbackUrl = 'http://3.39.25.7:8080/user/kakao'; // 리디렉션 URI 입력
 
     const handleTokenRequest = async (code) => {
         try {
@@ -33,7 +33,7 @@ const KakaoLogin = () => {
     const [user, setUser] = useState(null);
 
     const LoginHandler = () => {
-        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${Rest_api_key}&redirect_uri=${callbackUrl}&response_type=code`;
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${callbackUrl}&response_type=code&scope=account_email`;
     };
 
     useEffect(() => {
