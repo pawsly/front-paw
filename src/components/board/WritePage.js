@@ -54,7 +54,35 @@ const Write = () => {
             }}
           />
         </div>
-        <div className="write-section-body-profile"></div>
+        <div className="write-section-body-profile">
+          <div className="write-section-body-profile-border">
+            <div className="write-section-body-profile-border-img">
+              <span>등록된 사진이 없습니다.</span>
+            </div>
+          </div>
+          <div className="write-section-body-profile-name">
+            <span className="label">이름</span>
+          </div>
+          <div className="write-section-body-profile-nickname">
+            <span className="label">닉네임</span>
+          </div>
+          <div className="write-section-body-profile-followBtn">
+            <button>팔로잉</button>
+          </div>
+          <div className="write-section-body-profile-intro">
+            <span>3D Max 모델링 디자인 스터디</span>
+          </div>
+          <div className="write-section-body-profile-followState">
+            <div className="write-section-body-profile-followers">
+              <span>123만</span>
+              <span>팔로워</span>
+            </div>
+            <div className="write-section-body-profile-follow">
+              <span>25</span>
+              <span>팔로우</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
