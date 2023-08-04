@@ -1,6 +1,6 @@
 import Header from "../common/HeaderComponent";
 import { Editor } from "@tinymce/tinymce-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Write = () => {
   const [secretState, setSecretState] = useState(false);
@@ -11,12 +11,21 @@ const Write = () => {
   });
   const editorToolbar =
     "undo redo spellcheckdialog  | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography";
+  const [userData, setUserData] = useState("");
 
   const boardDetailChangeHandler = (event) => {
     setBoardDetail({ ...boardDetail, [event.target.id]: event.target.value });
 
     console.log(boardDetail);
   };
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userData");
+
+    if (userInfo) {
+      setUserData(JSON.parse(userInfo));
+    }
+  }, []);
 
   return (
     <div className="write-section">
@@ -61,25 +70,27 @@ const Write = () => {
             </div>
           </div>
           <div className="write-section-body-profile-name">
-            <span className="label">이름</span>
+            <span className="label">{userData.userid}</span>
           </div>
           <div className="write-section-body-profile-nickname">
-            <span className="label">닉네임</span>
+            <span className="label">{userData.nickname}</span>
           </div>
           <div className="write-section-body-profile-followBtn">
             <button>팔로잉</button>
           </div>
           <div className="write-section-body-profile-intro">
-            <span>3D Max 모델링 디자인 스터디</span>
+            <span className="write-section-body-profile-intro-content">
+              {userData.phone}
+            </span>
           </div>
           <div className="write-section-body-profile-followState">
-            <div className="write-section-body-profile-followers">
-              <span>123만</span>
-              <span>팔로워</span>
+            <div className="write-section-body-profile-followState-followers">
+              <span className="number">123만</span>
+              <span className="label">팔로워</span>
             </div>
-            <div className="write-section-body-profile-follow">
-              <span>25</span>
-              <span>팔로우</span>
+            <div className="write-section-body-profile-followState-follow">
+              <span className="number">25</span>
+              <span className="label">팔로우</span>
             </div>
           </div>
         </div>
