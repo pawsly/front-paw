@@ -12,12 +12,27 @@ const SetProfile = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState("");
   const [editState, setEditState] = useState(false);
+  const [profile, setProfile] = useState({
+    userid: userData.userid,
+    nickname: userData.nickname,
+    phone: userData.phone,
+  });
 
+  const editProfile = (field, value) => {
+    setProfile({
+      ...profile,
+      [field]: value,
+    });
+  };
+  const saveProfile = () => {
+    console.log(profile);
+  };
   useEffect(() => {
     const userInfo = localStorage.getItem("userData");
 
     if (userInfo) {
       setUserData(JSON.parse(userInfo));
+      setProfile(JSON.parse(userInfo));
     }
   }, []);
 
@@ -32,22 +47,40 @@ const SetProfile = () => {
           <div className="set-section-circle-edit-camera">
             <FontAwesomeIcon icon={faCamera} />
           </div>
-          <div className="set-section-circle-edit-nickname">
-            <span className="label">닉네임</span>
-            <div className="set-section-circle-edit-nickname-input">
-              <input type="text" placeholder={userData.nickname} />
-            </div>
-          </div>
           <div className="set-section-circle-edit-id">
             <span className="label">아이디</span>
             <div className="set-section-circle-edit-id-input">
-              <input type="text" placeholder={userData.userid} />
+              <input
+                name="userid"
+                type="text"
+                placeholder=""
+                value={userData.userid}
+                readOnly
+              />
+            </div>
+          </div>
+          <div className="set-section-circle-edit-nickname">
+            <span className="label">닉네임</span>
+            <div className="set-section-circle-edit-nickname-input">
+              <input
+                name="nickname"
+                type="text"
+                placeholder=""
+                value={profile.nickname}
+                onChange={(e) => editProfile(e.target.name, e.target.value)}
+              />
             </div>
           </div>
           <div className="set-section-circle-edit-info">
             <span className="label">소개글</span>
             <div className="set-section-circle-edit-info-input">
-              <input type="text" placeholder={userData.phone} />
+              <input
+                name="phone"
+                type="text"
+                placeholder=""
+                value={profile.phone}
+                onChange={(e) => editProfile(e.target.name, e.target.value)}
+              />
             </div>
           </div>
         </div>
@@ -56,15 +89,15 @@ const SetProfile = () => {
           <div className="set-section-circle-profile">
             <span>등록된 사진이 없습니다.</span>
           </div>
+          <div className="set-section-circle-id">
+            <span className="label">아이디</span>
+            <div className="set-section-circle-id-input">{userData.email}</div>
+          </div>
           <div className="set-section-circle-nickname">
             <span className="label">닉네임</span>
             <div className="set-section-circle-nickname-input">
               {userData.nickname}
             </div>
-          </div>
-          <div className="set-section-circle-id">
-            <span className="label">아이디</span>
-            <div className="set-section-circle-id-input">{userData.email}</div>
           </div>
           <div className="set-section-circle-info">
             <span className="label">소개글</span>
@@ -88,7 +121,7 @@ const SetProfile = () => {
 
       {editState ? (
         <div className="set-section-button">
-          <button className="save-btn">
+          <button className="save-btn" onClick={saveProfile}>
             <span>저장</span>
           </button>
           <button className="cancel-btn" onClick={() => setEditState(false)}>

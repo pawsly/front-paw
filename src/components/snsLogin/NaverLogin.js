@@ -13,29 +13,37 @@ const NaverLogin = () => {
     window.location.reload();
   };
   useEffect(() => {
-    const initializeNaverLogin = () => {
-      const naverLogin = new naver.LoginWithNaverId({
-        clientId: "lgklDmIp2xU8jyG57MEv",
-        callbackUrl: "http://localhost:8080/user/naver",
-        isPopup: false,
-        loginButton: { color: "green", type: 1, height: 58 },
-      });
-      naverLogin.init();
-
+    // const initializeNaverLogin = () => {
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: "lgklDmIp2xU8jyG57MEv",
+      callbackUrl: "http://localhost:8080/user/naver",
+      isPopup: false,
+      loginButton: { color: "green", type: 1, height: 58 },
+    });
+    naverLogin.init();
+    // naverLogout();
+    try {
       naverLogin.getLoginStatus((status) => {
         if (status) {
           console.log(naverLogin.user);
-          setUser({ ...naverLogin.user });
         }
       });
-    };
-    const getNaverToken = () => {
-      if (!location.hash) return;
-      const token = location.hash.split("=")[1].split("&")[0];
-      console.log(token);
-    };
-    initializeNaverLogin();
-    getNaverToken();
+    } catch (err) {
+      console.log(err);
+    }
+
+    //   naverLogin.getLoginStatus((status) => {
+    //     if (status) {
+    //       console.log(naverLogin.user);
+    //       setUser({ ...naverLogin.user });
+    //     }
+    //   });
+    // };
+    // const getNaverToken = () => {
+    //   if (!location.hash) return;
+    //   const token = location.hash.split("=")[1].split("&")[0];
+    //   console.log(token);
+    // };
   }, []);
 
   return (
