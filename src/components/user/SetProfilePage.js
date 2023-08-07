@@ -25,7 +25,9 @@ const SetProfile = () => {
     });
   };
   const saveProfile = () => {
-    console.log(profile);
+    setEditState(true);
+    window.location.reload();
+    localStorage.setItem("userData", JSON.stringify(profile));
   };
   useEffect(() => {
     const userInfo = localStorage.getItem("userData");
