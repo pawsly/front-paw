@@ -64,6 +64,7 @@ const Register = () => {
       phone: registerInfo.phone,
       birth: registerInfo.birth,
     };
+
     const res = await apiClient("/user/signup", data);
     if (res) {
       if (res.status === 200) {
@@ -86,7 +87,6 @@ const Register = () => {
       birth: "생년월일",
     };
 
-    console.log(page);
     if (n > 0) {
       for (let key in registerInfo) {
         if (n === 1 && key === "email") break;
