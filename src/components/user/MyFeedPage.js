@@ -20,6 +20,13 @@ const MyFeed = () => {
     "2023 디자인페스티벌, 아기자기 악세서리로 재탄생하다",
     "2023년 떠오르고 있는 신예 작가 전시전, 특전 정보 공유",
   ];
+  const mainCategoryList = [
+    { IT: "IT 소식" },
+    { FRONT: "프론트엔드" },
+    { BACK: "백엔드" },
+    { DESIGN: "디자인" },
+    { PORTFOLIO: "포트폴리오" },
+  ];
 
   useEffect(() => {
     const userInfo = localStorage.getItem("userData");
@@ -51,17 +58,37 @@ const MyFeed = () => {
           >
             <FontAwesomeIcon icon={faChartSimple} />
           </div>
-          <div className="my-section-category-opened-header-menu"></div>
+          <div className="my-section-category-opened-header-menu">
+            <div className="my-section-category-opened-header-menu-category">
+              <i className="fa-regular fa-file-lines"></i>
+              <span>내 카테고리 관리</span>
+            </div>
+            <i className="fa-solid fa-arrow-down-wide-short"></i>
+          </div>
         </div>
         <div className="my-section-category-opened-body">
           <div className="my-section-category-opened-body-first"></div>
-          <div className="my-section-category-opened-body-second"></div>
+          <div className="my-section-category-opened-body-second">
+            {mainCategoryList.map((category, index) => (
+              <div className="my-section-category-opened-body-second-item">
+                <span>{Object.values(category)}</span>
+              </div>
+            ))}
+          </div>
           <div className="my-section-category-opened-body-third"></div>
         </div>
         <div className="my-section-category-opened-footer">
-          <div className="my-section-category-opened-footer-delete"></div>
-          <div className="my-section-category-opened-footer-create"></div>
-          <div className="my-section-category-opened-footer-edit"></div>
+          <div className="my-section-category-opened-footer-delete">
+            <span>삭제</span>
+          </div>
+          <div className="my-section-category-opened-footer-create">
+            <span>카테고리 생성</span>
+            <i className="fa-solid fa-plus"></i>
+          </div>
+          <div className="my-section-category-opened-footer-edit">
+            <span>카테고리 수정</span>
+            <i className="fa-solid fa-plus"></i>
+          </div>
         </div>
       </div>
 
