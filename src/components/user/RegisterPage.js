@@ -67,8 +67,7 @@ const Register = () => {
     const res = await apiClient("/user/signup", data);
     if (res) {
       if (res.status === 200) {
-        console.log(res);
-        navigate("/");
+        movePage(2);
       } else {
         window.alert("이미 가입된 아이디입니다.");
       }
@@ -432,7 +431,7 @@ const Register = () => {
             </button>
             <button
               className="register-section-success-btn-login"
-              onClick={() => navigate("")}
+              onClick={() => navigate("/")}
             >
               로그인
             </button>
