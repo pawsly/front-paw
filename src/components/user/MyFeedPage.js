@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import parkImg from "../../public/images/park-img.png";
 import dudImg from "../../public/images/dud-img.jpg";
+import categoryIcon from "../../public/images/btn_icon.png";
 
 const MyFeed = () => {
   const [userData, setUserData] = useState("");
@@ -71,6 +72,7 @@ const MyFeed = () => {
           <div className="my-section-category-opened-body-second">
             {mainCategoryList.map((category, index) => (
               <div className="my-section-category-opened-body-second-item">
+                <img src={categoryIcon} alt="category icon" />
                 <span>{Object.values(category)}</span>
               </div>
             ))}

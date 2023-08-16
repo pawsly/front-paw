@@ -758,6 +758,11 @@
             align-items: center;
             font-size: 22px;
 
+            > img {
+              height: 35px;
+              margin-right: 26px;
+            }
+
             &:hover {
               background-color: #d9d9d9;
             }
