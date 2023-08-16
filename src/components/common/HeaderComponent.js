@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import mainLogo from "../../public/images/logo.png";
-import testLogo from "../../public/images/test-logo.png";
+import whiteLogo from "../../public/images/logo_white.png";
 import React, { useEffect, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 
@@ -70,8 +70,10 @@ const Header = (props) => {
     >
       <span className={path === "/" ? "title" : "header-section-title"}>
         <img
-          src={mainLogo}
-          className="main-logo"
+          src={path.split("/")[1] === "setting" ? whiteLogo : mainLogo}
+          className={
+            path.split("/")[1] === "setting" ? "white-logo" : "main-logo"
+          }
           alt="main Logo"
           onClick={handleLogoClick}
         />

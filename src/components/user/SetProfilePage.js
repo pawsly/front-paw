@@ -93,7 +93,7 @@ const SetProfile = () => {
           </div>
           <div className="set-section-circle-id">
             <span className="label">아이디</span>
-            <div className="set-section-circle-id-input">{userData.email}</div>
+            <div className="set-section-circle-id-input">{userData.userid}</div>
           </div>
           <div className="set-section-circle-nickname">
             <span className="label">닉네임</span>
