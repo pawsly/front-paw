@@ -3,14 +3,18 @@ import { useLocation } from "react-router-dom";
 
 const NaverLogin = () => {
   const { naver } = window; //js 에 있는 naver 선언
-  // const NAVER_CLIENT_ID = "lgklDmIp2xU8jyG57MEv";
-  // const NAVER_CALLBACK_URL = "http://localhost:8080/user/naver";
+  const NAVER_CLIENT_ID = "lgklDmIp2xU8jyG57MEv";
+  const REDIRECT_URI = "http://localhost:8080/user/naver";
+  const STATE = false;
   const [user, setUser] = useState(null);
-  const location = useLocation();
+  const NAVER_AUTH_URL = `http://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&state=${STATE}&redirect_uri=${REDIRECT_URI}`;
 
   const naverLogout = () => {
     localStorage.removeItem("com.naver.nid.access_token");
     window.location.reload();
+  };
+  const naverLogin = () => {
+    window.location.href = NAVER_AUTH_URL;
   };
   useEffect(() => {
     // const initializeNaverLogin = () => {
