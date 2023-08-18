@@ -64,11 +64,11 @@ const Register = () => {
       phone: registerInfo.phone,
       birth: registerInfo.birth,
     };
+
     const res = await apiClient("/user/signup", data);
     if (res) {
       if (res.status === 200) {
-        console.log(res);
-        navigate("/");
+        movePage(2);
       } else {
         window.alert("이미 가입된 아이디입니다.");
       }
@@ -87,7 +87,6 @@ const Register = () => {
       birth: "생년월일",
     };
 
-    console.log(page);
     if (n > 0) {
       for (let key in registerInfo) {
         if (n === 1 && key === "email") break;
@@ -432,7 +431,7 @@ const Register = () => {
             </button>
             <button
               className="register-section-success-btn-login"
-              onClick={() => navigate("")}
+              onClick={() => navigate("/")}
             >
               로그인
             </button>

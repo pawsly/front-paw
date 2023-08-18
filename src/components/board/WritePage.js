@@ -1,22 +1,79 @@
 import Header from "../common/HeaderComponent";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useState } from "react";
+import { apiClient } from "../utils/api";
 
 const Write = () => {
+  const categoryList = [
+    { category01: "코딩 개발일지" },
+    { category02: "확률과 통계" },
+  ];
   const [secretState, setSecretState] = useState(false);
+  const [categoryState, setCategoryState] = useState(false);
   const [boardDetail, setBoardDetail] = useState({
+    user: "",
+    nickname: "",
     title: "",
     content: "",
-    secret: "",
+    secret: false,
+    categoryKey: "",
+    boardState: "N", // 임시저장 여부: N or Y
   });
   const editorToolbar =
     "undo redo spellcheckdialog  | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography";
   const [userData, setUserData] = useState("");
 
+  const selectCategory = (key) => {
+    boardDetail.categoryKey = key;
+  };
+
+  const editorChangeHandler = (event) => {
+    boardDetail.content = event;
+  };
+
   const boardDetailChangeHandler = (event) => {
     setBoardDetail({ ...boardDetail, [event.target.id]: event.target.value });
+  };
+
+  const doPublish = async () => {
+    boardDetail.user = userData.userKey;
+    boardDetail.nickname = userData.nickname;
+    boardDetail.secret = secretState ? "Y" : "N";
+    boardDetail.boardState = "Y";
+
+    const boardInfoKey = {
+      title: "제목",
+      content: "내용",
+      categoryKey: "카테고리",
+    };
+
+    for (let key in boardInfoKey) {
+      if (!boardDetail[key]) {
+        if (key === "categoryKey") {
+          window.alert("카테고리를 선택해 주세요.");
+          return false;
+        } else {
+          window.alert(boardInfoKey[key] + "이 비어 있습니다.");
+          return false;
+        }
+      }
+    }
 
     console.log(boardDetail);
+
+    const result = await apiClient("/board/post", boardDetail);
+    console.log(result);
+
+    if (result) {
+      if (result.status === 200) {
+      } else {
+        window.alert("게시물 업로드에 실패했습니다. 다시 시도하세요.");
+        return false;
+      }
+    } else {
+      window.alert("게시물 업로드에 실패했습니다. 다시 시도하세요.");
+      return false;
+    }
   };
 
   useEffect(() => {
@@ -29,7 +86,7 @@ const Write = () => {
 
   return (
     <div className="write-section">
-      <Header />
+      <Header clickPublish={doPublish} />
       <div className="write-section-body">
         <div className="write-section-body-text">
           <div className="write-section-body-text-title">
@@ -50,7 +107,26 @@ const Write = () => {
                 ></button>
                 비밀글
               </label>
-              <div>카테고리</div>
+              <div
+                className="category"
+                onClick={() => setCategoryState(!categoryState)}
+              >
+                <span>카테고리</span>
+                <i className="fa-solid fa-caret-down"></i>
+              </div>
+              {categoryState && (
+                <div className="category-box">
+                  {categoryList.map((category, index) => (
+                    <div
+                      className="category-box-item"
+                      key={index}
+                      onClick={() => selectCategory(Object.keys(category)[0])}
+                    >
+                      {Object.values(category)}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           <Editor
@@ -61,6 +137,7 @@ const Write = () => {
               placeholder: "당신의 Pawsly를 적어주세요!",
               height: "100%",
             }}
+            onEditorChange={editorChangeHandler}
           />
         </div>
         <div className="write-section-body-profile">
