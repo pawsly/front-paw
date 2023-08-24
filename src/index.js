@@ -9,6 +9,9 @@ import PersonalFeed from "./components/user/PersonalFeedPage";
 import LoginPage from "./components/user/LoginPage";
 import MyFeed from "./components/user/MyFeedPage";
 import SetProfile from "./components/user/SetProfilePage";
+import { CookiesProvider } from "react-cookie";
+import { Provider } from "react-redux";
+import store from "./store";
 
 const router = createBrowserRouter([
   {
@@ -47,16 +50,18 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <>
-    {/*<span className="title">*/}
-    {/*  <img*/}
-    {/*    src={mainLogo}*/}
-    {/*    alt="main Logo"*/}
-    {/*    onClick={() => (window.location = "/")}*/}
-    {/*  />*/}
-    {/*</span>*/}
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </>
+  <CookiesProvider>
+    <Provider store={store}>
+      {/*<span className="title">*/}
+      {/*  <img*/}
+      {/*    src={mainLogo}*/}
+      {/*    alt="main Logo"*/}
+      {/*    onClick={() => (window.location = "/")}*/}
+      {/*  />*/}
+      {/*</span>*/}
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </Provider>
+  </CookiesProvider>
 );

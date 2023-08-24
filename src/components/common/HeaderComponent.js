@@ -13,9 +13,13 @@ import mainLogo from "../../public/images/logo.png";
 import whiteLogo from "../../public/images/logo_white.png";
 import React, { useEffect, useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
+import { removeCookieToken } from "../../storage/Cookie";
+import { useDispatch } from "react-redux";
+import { DELETE_TOKEN } from "../../store/Auth";
 
 const Header = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const path = useLocation().pathname;
   const [profileState, setProfileState] = useState(false);
   const [userData, setUserData] = useState("");
@@ -27,6 +31,10 @@ const Header = (props) => {
   };
 
   const doLogout = () => {
+    // store에 저장된 Access Token 정보를 삭제
+    dispatch(DELETE_TOKEN());
+    // Cookie에 저장된 Refresh Token 정보를 삭제
+    removeCookieToken();
     localStorage.removeItem("userData");
     navigate("/");
   };

@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log("하하 ing..");
+    console.log(config);
     return config;
   },
   (error) => {
