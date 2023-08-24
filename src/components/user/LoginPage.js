@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import tipImg from "../../public/images/tip-img1.png";
 import googleIcon from "../../public/images/google-icon.png";
-import kakaoIcon from "../../public/images/kakao-icon.png";
+// import kakaoIcon from "../../public/images/kakao-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import ClickAwayListener from "react-click-away-listener";
-import axios from "axios";
 import NaverLogin from "../snsLogin/NaverLogin";
 import Header from "../common/HeaderComponent";
 import { apiClient } from "../utils/api";
 import KaKaoLogin from "../snsLogin/KaKaoLogin";
+import { setRefreshToken } from "../../storage/Cookie";
+import { useDispatch } from "react-redux";
+import { SET_TOKEN } from "../../store/Auth";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [clickSection, setClickSection] = useState("");
   const [loginInfo, setLoginInfo] = useState({
     id: "",
@@ -23,6 +26,7 @@ const Login = () => {
   const [emailState, setEmailState] = useState(false);
   const [passwdMode, setPasswdMode] = useState(true);
   const [checked, setChecked] = useState(false);
+  const JWT_EXPIRY_TIME = 24 * 3600 * 1000;
 
   // input 바깥 영역 누르면 모든 active style 해지
   const clickAwayHandler = (event) => {
@@ -54,11 +58,19 @@ const Login = () => {
       password: loginInfo.passwd,
     };
     const res = await apiClient("/user/login", data);
+
     if (res) {
       if (res.status === 200) {
-        console.log(res.data);
+        // accessToken 헤더 등록 후, accessToken 만료 1분 전 로그인 연장
+        setRefreshToken(res.data.refreshToken);
+        dispatch(SET_TOKEN(res.data.accessToken));
+
+        // accessToken, refreshToken 제외한 유저 정보 로컬 스토리지에 저장
+        delete res.data.accessToken;
+        delete res.data.refreshToken;
         const JSONData = JSON.stringify(res.data);
         localStorage.setItem("userData", JSONData);
+
         window.alert("로그인에 성공하셨습니다.");
         navigate("/main");
       } else {
