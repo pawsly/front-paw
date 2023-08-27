@@ -10,7 +10,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    console.log(config);
     return config;
   },
   (error) => {
@@ -41,4 +40,13 @@ export const apiClient = async (url: string, data: string) => {
     .catch((e) => {
       console.error(e);
     });
+};
+
+export const setAuthorizationToken = (token: string) => {
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    console.log(axios.defaults.headers.common["Authorization"]);
+  } else {
+    delete axios.defaults.headers.common["Authorization"];
+  }
 };
