@@ -29,6 +29,7 @@ const Write = () => {
   const selectCategory = (key, value) => {
     boardDetail.categoryKey = key;
     setCategoryHolder(value);
+    setCategoryState(false);
   };
 
   const editorChangeHandler = (event) => {
