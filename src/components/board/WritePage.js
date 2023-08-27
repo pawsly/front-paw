@@ -1,18 +1,21 @@
 import Header from "../common/HeaderComponent";
 import { Editor } from "@tinymce/tinymce-react";
 import { useEffect, useState } from "react";
-import { apiClient } from "../utils/api";
+import { apiClient, setAuthorizationToken } from "../utils/api";
+import { useSelector } from "react-redux";
 
 const Write = () => {
+  const accessToken = useSelector(
+    (state) => state.authToken.accessToken.payload
+  ); // accessToken 불러오기: 꼭 여기서 불러와야 함 함수 안에서 불러오면 오류남!!!!
   const categoryList = [
     { category01: "코딩 개발일지" },
     { category02: "확률과 통계" },
   ];
+  const [categoryHolder, setCategoryHolder] = useState("카테고리");
   const [secretState, setSecretState] = useState(false);
   const [categoryState, setCategoryState] = useState(false);
   const [boardDetail, setBoardDetail] = useState({
-    user: "",
-    nickname: "",
     title: "",
     content: "",
     secret: false,
@@ -23,8 +26,9 @@ const Write = () => {
     "undo redo spellcheckdialog  | blocks fontfamily fontsizeinput | bold italic underline forecolor backcolor | link image | align lineheight checklist bullist numlist | indent outdent | removeformat typography";
   const [userData, setUserData] = useState("");
 
-  const selectCategory = (key) => {
+  const selectCategory = (key, value) => {
     boardDetail.categoryKey = key;
+    setCategoryHolder(value);
   };
 
   const editorChangeHandler = (event) => {
@@ -36,8 +40,6 @@ const Write = () => {
   };
 
   const doPublish = async () => {
-    boardDetail.user = userData.userKey;
-    boardDetail.nickname = userData.nickname;
     boardDetail.secret = secretState ? "Y" : "N";
     boardDetail.boardState = "Y";
 
@@ -59,13 +61,17 @@ const Write = () => {
       }
     }
 
-    console.log(boardDetail);
+    console.log("board detail: ", boardDetail);
+    console.log("access token: ", accessToken);
 
+    await setAuthorizationToken(accessToken); // 요청할 때 accessToken 헤더에 설정
     const result = await apiClient("/board/post", boardDetail);
-    console.log(result);
+
+    console.log("result: ", result);
 
     if (result) {
       if (result.status === 200) {
+        window.alert("게시물 업로드에 성공했습니다.");
       } else {
         window.alert("게시물 업로드에 실패했습니다. 다시 시도하세요.");
         return false;
@@ -111,7 +117,7 @@ const Write = () => {
                 className="category"
                 onClick={() => setCategoryState(!categoryState)}
               >
-                <span>카테고리</span>
+                <span>{categoryHolder}</span>
                 <i className="fa-solid fa-caret-down"></i>
               </div>
               {categoryState && (
@@ -120,7 +126,12 @@ const Write = () => {
                     <div
                       className="category-box-item"
                       key={index}
-                      onClick={() => selectCategory(Object.keys(category)[0])}
+                      onClick={() =>
+                        selectCategory(
+                          Object.keys(category)[0],
+                          Object.values(category)
+                        )
+                      }
                     >
                       {Object.values(category)}
                     </div>
