@@ -59,9 +59,11 @@ const Login = () => {
     };
     const res = await apiClient("/user/login", data);
 
+    console.log(res.data.refreshToken);
+    console.log(res.data.accessToken);
+
     if (res) {
       if (res.status === 200) {
-        // accessToken 헤더 등록 후, accessToken 만료 1분 전 로그인 연장
         setRefreshToken(res.data.refreshToken);
         dispatch(SET_TOKEN(res.data.accessToken));
 
