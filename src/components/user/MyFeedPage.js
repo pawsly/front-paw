@@ -1,17 +1,13 @@
 import Header from "../common/HeaderComponent";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faBars,
     faChartSimple,
     faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import parkImg from "../../public/images/park-img.png";
-import dudImg from "../../public/images/dud-img.jpg";
-import categoryIcon from "../../public/images/btn_icon.png";
-import {apiClient} from "../utils/api";
 import axios from "axios";
-
+import dudImg from "../../public/images/dud-img.jpg";
 const MyFeed = () => {
     const [userData, setUserData] = useState("");
     const [openState, setOpenState] = useState(false);
@@ -24,22 +20,14 @@ const MyFeed = () => {
         if (userInfo) {
             setUserData(JSON.parse(userInfo));
         }
-        axios.get("http://3.39.25.7:8080/board/list/{writer}")
+        axios.get("http://3.39.25.7:8080/board/list/writer")
             .then(response => {
                 setBoardList(response.data);
-
-
             })
-
             .catch(error => {
-                console.error("데이터 가져오기 실패:", error);
+                console.error("최신 글 데이터 가져오기 실패:", error);
             });
     }, []);
-
-    // const currentUserBoardList = boardList.filter(
-    //     (post) => post.writer === userData.nickname
-    // );
-
 
     return (
         <div className="my-section">
@@ -95,7 +83,7 @@ const MyFeed = () => {
                     boardList.slice(0, 6).map((board) => (
                         <div key={board.boardKey} className="my-section-list-item">
                             <div className="my-section-list-item-img">
-                                {/* 이미지 렌더링 */}
+                                <img src={dudImg} alt="dud img"/>
                             </div>
                             <div className="my-section-list-item-title">{board.title}</div>
                         </div>
