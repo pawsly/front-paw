@@ -616,6 +616,53 @@
 
       &-new {
         height: 938px;
+
+        &-sort {
+          width: 230px;
+          height: 19px;
+          font-size: 16px;
+          color: $sub-color;
+        }
+
+
+        &-item {
+          width: 273px;
+          height: 273px;
+          margin: 0 18px;
+          display: flex;
+          flex-direction: column;
+          float: right;
+          cursor: pointer;
+
+          &-img {
+            overflow: hidden;
+            width: 273px;
+            height: 273px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: all 300ms;
+            }
+          }
+
+          &-title {
+            margin: 17px 0 27px 0;
+            width: 100%;
+            font-size: 22px;
+          }
+
+          &:hover {
+            img {
+              width: 110%;
+              height: 110%;
+            }
+          }
+        }
       }
     }
 
@@ -1181,3 +1228,4 @@
     }
   }
 }
+
