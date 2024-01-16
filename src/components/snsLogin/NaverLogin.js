@@ -1,19 +1,25 @@
+/* eslint-disable */
+
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import naverIcon from'../../public/images/naver-icon.png'
 
 const NaverLogin = () => {
   const { naver } = window; //js 에 있는 naver 선언
-  // const NAVER_CLIENT_ID = "lgklDmIp2xU8jyG57MEv";
-  // const NAVER_CALLBACK_URL = "http://localhost:8080/user/naver";
+  const NAVER_CLIENT_ID = "lgklDmIp2xU8jyG57MEv";
+  const REDIRECT_URI = "http://localhost:8080/user/naver";
   const [user, setUser] = useState(null);
-  const location = useLocation();
+  const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile`;
 
   const naverLogout = () => {
     localStorage.removeItem("com.naver.nid.access_token");
     window.location.reload();
   };
+  const naverLogin = () => {
+    window.location.href = NAVER_AUTH_URL;
+  };
   useEffect(() => {
-    // const initializeNaverLogin = () => {
     const naverLogin = new naver.LoginWithNaverId({
       clientId: "lgklDmIp2xU8jyG57MEv",
       callbackUrl: "http://localhost:8080/user/naver",
@@ -37,13 +43,9 @@ const NaverLogin = () => {
     //       console.log(naverLogin.user);
     //       setUser({ ...naverLogin.user });
     //     }
-    //   });
+    //   })
     // };
-    // const getNaverToken = () => {
-    //   if (!location.hash) return;
-    //   const token = location.hash.split("=")[1].split("&")[0];
-    //   console.log(token);
-    // };
+
   }, []);
 
   return (
