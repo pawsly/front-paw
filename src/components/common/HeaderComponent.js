@@ -91,8 +91,10 @@ const Header = (props) => {
           <button className="back-btn" onClick={() => navigate(-1)}>
             뒤로가기
           </button>
-          <button className="save-btn">저장</button>
-          <button className="publish-btn" onClick={() => clickPublish()}>
+          <button className="save-btn" onClick={() => clickPublish("N")}>
+            저장
+          </button>
+          <button className="publish-btn" onClick={() => clickPublish("Y")}>
             발행
           </button>
         </div>
