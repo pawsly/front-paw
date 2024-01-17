@@ -12,6 +12,9 @@ import SetProfile from "./components/user/SetProfilePage";
 import { CookiesProvider } from "react-cookie";
 import { Provider } from "react-redux";
 import store from "./store";
+import AppWrapper from "./AppWrapper";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
 
 const router = createBrowserRouter([
   {
@@ -48,20 +51,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const persistor = persistStore(store);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <CookiesProvider>
     <Provider store={store}>
-      {/*<span className="title">*/}
-      {/*  <img*/}
-      {/*    src={mainLogo}*/}
-      {/*    alt="main Logo"*/}
-      {/*    onClick={() => (window.location = "/")}*/}
-      {/*  />*/}
-      {/*</span>*/}
-      <React.StrictMode>
+      <PersistGate persistor={persistor}>
+        {/*<AppWrapper router={router} /> /!* AppWrapper 컴포넌트를 사용합니다. *!/*/}
         <RouterProvider router={router} />
-      </React.StrictMode>
+      </PersistGate>
     </Provider>
   </CookiesProvider>
 );
