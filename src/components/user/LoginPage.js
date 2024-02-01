@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import tipImg from "../../public/images/tip-img1.png";
 import googleIcon from "../../public/images/google-icon.png";
-// import kakaoIcon from "../../public/images/kakao-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
@@ -59,8 +58,8 @@ const Login = () => {
     };
     const res = await apiClient("/user/login", data);
 
-    console.log(res.data.refreshToken);
-    console.log(res.data.accessToken);
+    // console.log(res.data.refreshToken);
+    // console.log(res);
 
     if (res) {
       if (res.status === 200) {

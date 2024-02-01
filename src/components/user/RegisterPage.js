@@ -8,7 +8,7 @@ import { apiClient } from "../utils/api";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [clickSection, setClickSection] = useState("");
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
@@ -23,31 +23,48 @@ const Register = () => {
   const [checkPasswd, setCheckPasswd] = useState("");
   const [passwdMode, setPasswdMode] = useState(true);
   const [rightPasswd, setRightPasswd] = useState(true);
+  const domainOption = [
+    { NAVER: "naver.com" },
+    { QWER: "놀고싶어놀고싶어" },
+    { GOOGLE: "gmail.com" },
+  ];
+  const [domainOpenState, setDomainOpenState] = useState(false);
 
-  const handleClickAway = (e) => {
-    if (e.isTrusted) {
+  const handleClickAway = (event) => {
+    if (event.isTrusted) {
       setClickSection("");
     }
   };
 
-  const onChangeHandler = (e) => {
-    if (e.target.id === "checkPasswd") {
-      setCheckPasswd(e.target.value);
-      if (registerInfo.passwd === e.target.value) {
+  const onChangeHandler = (event) => {
+    if (event.target.id === "checkPasswd") {
+      setCheckPasswd(event.target.value);
+      if (registerInfo.passwd === event.target.value) {
         setRightPasswd(true);
       } else {
         setRightPasswd(false);
       }
     } else {
-      if (e.target.id === "passwd") {
-        if (checkPasswd === e.target.value) {
+      if (event.target.id === "passwd") {
+        if (checkPasswd === event.target.value) {
           setRightPasswd(true);
         } else {
           setRightPasswd(false);
         }
       }
-      setRegisterInfo({ ...registerInfo, [e.target.id]: e.target.value });
+      setRegisterInfo({
+        ...registerInfo,
+        [event.target.id]: event.target.value,
+      });
     }
+  };
+
+  const onOptionSelectHandler = (option) => {
+    setRegisterInfo((current) => {
+      let newInfo = { ...current };
+      newInfo["domain"] = option;
+      return newInfo;
+    });
   };
 
   const checkIdDuplication = () => {
@@ -59,7 +76,7 @@ const Register = () => {
       name: registerInfo.name,
       userid: registerInfo.id,
       password: registerInfo.passwd,
-      email: registerInfo.email + "@" + registerInfo.domain,
+      email: registerInfo.email + "@" + registerInfo.domain.domain,
       nickname: registerInfo.nickname,
       phone: registerInfo.phone,
       birth: registerInfo.birth,
@@ -162,6 +179,7 @@ const Register = () => {
                   <input
                     type="text"
                     className="register-section-box-input-email-domain"
+                    placeholder="도메인"
                     id="domain"
                     value={registerInfo.domain}
                     onClick={() => setClickSection("email")}
@@ -173,12 +191,32 @@ const Register = () => {
                           : "white",
                     }}
                   />
-                  <button className="register-section-box-input-email-drop">
+                  <button
+                    className="register-section-box-input-email-drop"
+                    onClick={() => setDomainOpenState(!domainOpenState)}
+                  >
                     <FontAwesomeIcon
                       icon={faChevronDown}
                       className="down-icon"
-                    ></FontAwesomeIcon>{" "}
+                    ></FontAwesomeIcon>
                   </button>
+                  <div
+                    className={
+                      "register-section-box-input-email-option" +
+                      (domainOpenState ? "-active" : "")
+                    }
+                  >
+                    {domainOption.map((option, index) => (
+                      <div
+                        onClick={() =>
+                          onOptionSelectHandler(Object.values(option)[0])
+                        }
+                        key={index}
+                      >
+                        {Object.values(option)[0]}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <></>
