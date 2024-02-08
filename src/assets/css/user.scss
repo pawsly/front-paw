@@ -262,6 +262,13 @@
     &-input,
     &-input-active {
       border: 3px solid $background-color;
+
+      &-tip {
+        position: absolute;
+        margin-left: 10px;
+        font-size: 14px;
+        color: #e00d0d;
+      }
     }
 
     &-input {
@@ -429,7 +436,9 @@
 
       &-option {
         position: absolute;
+        z-index: -10;
         top: 0;
+        right: 0;
         opacity: 0;
       }
 

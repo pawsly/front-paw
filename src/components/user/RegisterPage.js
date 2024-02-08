@@ -8,7 +8,7 @@ import { apiClient } from "../utils/api";
 
 const Register = () => {
   const navigate = useNavigate();
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [clickSection, setClickSection] = useState("");
   const [registerInfo, setRegisterInfo] = useState({
     name: "",
@@ -22,6 +22,7 @@ const Register = () => {
   });
   const [checkPasswd, setCheckPasswd] = useState("");
   const [passwdMode, setPasswdMode] = useState(true);
+  const [rightPhone, setRightPhone] = useState(true);
   const [rightPasswd, setRightPasswd] = useState(true);
   const domainOption = [
     { NAVER: "naver.com" },
@@ -52,10 +53,23 @@ const Register = () => {
           setRightPasswd(false);
         }
       }
+
       setRegisterInfo({
         ...registerInfo,
         [event.target.id]: event.target.value,
       });
+
+      if (event.target.id === "phone") {
+        let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+        if (regPhone.test(registerInfo.phone) === true) {
+          console.log(registerInfo.phone);
+          setRightPhone(true);
+        } else {
+          console.log(registerInfo.phone);
+          setRightPhone(false);
+        }
+      }
     }
   };
 
@@ -72,6 +86,14 @@ const Register = () => {
   };
 
   const doSign = async () => {
+    if (!rightPhone) {
+      window.alert(
+        "연락처가 정상적으로 작성되지 않았습니다.\n다시 확인해 주세요."
+      );
+
+      return false;
+    }
+
     let data = {
       name: registerInfo.name,
       userid: registerInfo.id,
@@ -114,6 +136,7 @@ const Register = () => {
           window.alert(
             "비밀번호 확인이 정상적으로 이루어지지 않았습니다.\n다시 확인해 주세요."
           );
+
           return false;
         }
       }
@@ -330,27 +353,36 @@ const Register = () => {
                   )}
                 </div>
               ) : page === 1 ? (
-                <div
-                  className={
-                    "register-section-box-input" +
-                    (clickSection === "phone" ? "-active" : "")
-                  }
-                  style={{
-                    backgroundColor:
-                      clickSection !== "phone" && registerInfo.phone
-                        ? "#ebebeb"
-                        : "white",
-                  }}
-                >
-                  <input
-                    type="text"
-                    className="register-section-box-input-passwd"
-                    placeholder="연락처"
-                    id="phone"
-                    value={registerInfo.phone}
-                    onClick={() => setClickSection("phone")}
-                    onChange={onChangeHandler}
-                  />
+                <div>
+                  <div
+                    className={
+                      "register-section-box-input" +
+                      (clickSection === "phone" ? "-active" : "")
+                    }
+                    style={{
+                      backgroundColor:
+                        clickSection !== "phone" && registerInfo.phone
+                          ? "#ebebeb"
+                          : "white",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      className="register-section-box-input-passwd"
+                      placeholder="연락처"
+                      id="phone"
+                      value={registerInfo.phone}
+                      onClick={() => setClickSection("phone")}
+                      onChange={onChangeHandler}
+                    />
+                  </div>
+                  {!rightPhone ? (
+                    <span className="register-section-box-input-tip">
+                      연락처 11자리를 정확히 입력해 주세요.
+                    </span>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               ) : (
                 <></>
