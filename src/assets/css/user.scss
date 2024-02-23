@@ -1,3 +1,81 @@
+@import "mixin";
+
+@include desktopToLaptop {
+  .login-section {
+    &-box {
+      width: 980px;
+      height: 586px;
+
+      &-tip {
+        padding-left: 23px;
+        width: calc(100% - 471px);
+      }
+
+      &-content {
+        padding-left: 46px;
+        padding-top: 59px;
+        width: 471px;
+
+        &-welcome {
+          margin-bottom: 45px;
+          font-size: 35px;
+        }
+
+        &-simple {
+          &-title {
+            margin-top: 35px;
+          }
+
+          &-icon {
+            img {
+              width: 46px;
+              height: 46px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include desktop {
+  .login-section {
+    &-box {
+      width: 1180px;
+      height: 786px;
+
+      &-tip {
+        padding-left: 43px;
+        width: calc(100% - 571px);
+      }
+
+      &-content {
+        padding-left: 86px;
+        padding-top: 109px;
+        width: 571px;
+
+        &-welcome {
+          margin-bottom: 91px;
+          font-size: 45px;
+        }
+
+        &-simple {
+          &-title {
+            margin-top: 70px;
+          }
+
+          &-icon {
+            img {
+              width: 66px;
+              height: 66px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .login-section {
   height: 100%;
   display: flex;
@@ -6,8 +84,6 @@
   align-items: center;
 
   &-box {
-    width: 1180px;
-    height: 786px;
     display: flex;
     justify-content: center;
     background-color: white;
@@ -15,9 +91,7 @@
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 
     &-tip {
-      width: calc(100% - 571px);
       height: 100%;
-      padding-left: 43px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,15 +109,10 @@
     }
 
     &-content {
-      width: 571px;
-      padding-left: 86px;
-      padding-top: 109px;
       display: flex;
       flex-direction: column;
 
       &-welcome {
-        margin-bottom: 91px;
-        font-size: 45px;
         font-weight: bold;
         color: $primary-color;
       }
@@ -73,7 +142,8 @@
           color: #928d8d;
         }
 
-        &-active {
+        &-active:focus-within,
+        &:focus-within {
           background-color: white;
           border: 3px solid $primary-color;
         }
@@ -188,7 +258,6 @@
 
         &-title {
           width: 100%;
-          margin-top: 70px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -210,8 +279,6 @@
           justify-content: center;
 
           img {
-            width: 66px;
-            height: 66px;
             margin: 14px 8px;
             border-radius: 50%;
             cursor: pointer;
@@ -258,11 +325,22 @@
       align-items: center;
     }
 
+    &-input,
+    &-input-active {
+      border: 3px solid $background-color;
+
+      &-tip {
+        position: absolute;
+        margin-left: 10px;
+        font-size: 14px;
+        color: #e00d0d;
+      }
+    }
+
     &-input {
       padding: 0 22px 0 32px;
       align-items: center;
       background-color: white;
-      border: 3px solid $background-color;
       border-radius: 248px;
 
       input,
@@ -288,11 +366,12 @@
         border-radius: 248px;
       }
 
-      &-active {
+      &-active:focus-within,
+      &:focus-within {
         border: 3px solid $primary-color;
       }
 
-      &-active-wrong {
+      &-active-wrong:focus-within {
         border: 3px solid #e00d0d;
       }
 
@@ -314,6 +393,10 @@
         outline: 0;
         font-size: 16px;
         color: #928d8d;
+
+        &:focus {
+          border: 3px solid $primary-color;
+        }
       }
 
       button {
@@ -338,12 +421,6 @@
       height: 59px;
       display: flex;
       align-items: center;
-
-      input {
-        height: 100%;
-        background-color: white;
-        border: 3px solid $primary-color;
-      }
     }
 
     &-interval {
@@ -390,6 +467,7 @@
     // 2차 기입
     &-input-email,
     &-input-email-active {
+      position: relative;
       width: 100%;
       height: 59px;
       display: flex;
@@ -421,18 +499,57 @@
           font-size: 22px;
         }
       }
-    }
 
-    &-input-email {
-      input {
+      &-option {
+        position: absolute;
+        z-index: -10;
+        top: 0;
+        right: 0;
+        opacity: 0;
+      }
+
+      &-option-active {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        height: auto;
+        width: 185px;
         background-color: white;
-        border: 3px solid $background-color;
+        border-radius: 30px;
+        box-shadow: 2px 2px 4px 0 $background-color;
+        transition: all 300ms;
+
+        div {
+          overflow: hidden;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &:hover {
+            background-color: $background-color;
+          }
+        }
+
+        div:first-child {
+          border-radius: 30px 30px 0 0;
+        }
+
+        div:last-child {
+          border-radius: 0 0 30px 30px;
+        }
       }
     }
 
+    &-input-email,
     &-input-email-active {
       input {
-        border: 3px solid $primary-color;
+        background-color: white;
+        border: 3px solid $background-color;
+
+        &:focus {
+          border: 3px solid $primary-color;
+        }
       }
     }
 
@@ -623,7 +740,6 @@
           font-size: 16px;
           color: $sub-color;
         }
-
 
         &-item {
           width: 273px;
@@ -1228,4 +1344,3 @@
     }
   }
 }
-

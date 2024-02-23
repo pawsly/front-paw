@@ -22,32 +22,63 @@ const Register = () => {
   });
   const [checkPasswd, setCheckPasswd] = useState("");
   const [passwdMode, setPasswdMode] = useState(true);
+  const [rightPhone, setRightPhone] = useState(true);
   const [rightPasswd, setRightPasswd] = useState(true);
+  const domainOption = [
+    { NAVER: "naver.com" },
+    { QWER: "놀고싶어놀고싶어" },
+    { GOOGLE: "gmail.com" },
+  ];
+  const [domainOpenState, setDomainOpenState] = useState(false);
 
-  const handleClickAway = (e) => {
-    if (e.isTrusted) {
+  const handleClickAway = (event) => {
+    if (event.isTrusted) {
       setClickSection("");
     }
   };
 
-  const onChangeHandler = (e) => {
-    if (e.target.id === "checkPasswd") {
-      setCheckPasswd(e.target.value);
-      if (registerInfo.passwd === e.target.value) {
+  const onChangeHandler = (event) => {
+    if (event.target.id === "checkPasswd") {
+      setCheckPasswd(event.target.value);
+      if (registerInfo.passwd === event.target.value) {
         setRightPasswd(true);
       } else {
         setRightPasswd(false);
       }
     } else {
-      if (e.target.id === "passwd") {
-        if (checkPasswd === e.target.value) {
+      if (event.target.id === "passwd") {
+        if (checkPasswd === event.target.value) {
           setRightPasswd(true);
         } else {
           setRightPasswd(false);
         }
       }
-      setRegisterInfo({ ...registerInfo, [e.target.id]: e.target.value });
+
+      setRegisterInfo({
+        ...registerInfo,
+        [event.target.id]: event.target.value,
+      });
+
+      if (event.target.id === "phone") {
+        let regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+        if (regPhone.test(registerInfo.phone) === true) {
+          console.log(registerInfo.phone);
+          setRightPhone(true);
+        } else {
+          console.log(registerInfo.phone);
+          setRightPhone(false);
+        }
+      }
     }
+  };
+
+  const onOptionSelectHandler = (option) => {
+    setRegisterInfo((current) => {
+      let newInfo = { ...current };
+      newInfo["domain"] = option;
+      return newInfo;
+    });
   };
 
   const checkIdDuplication = () => {
@@ -55,11 +86,19 @@ const Register = () => {
   };
 
   const doSign = async () => {
+    if (!rightPhone) {
+      window.alert(
+        "연락처가 정상적으로 작성되지 않았습니다.\n다시 확인해 주세요."
+      );
+
+      return false;
+    }
+
     let data = {
       name: registerInfo.name,
       userid: registerInfo.id,
       password: registerInfo.passwd,
-      email: registerInfo.email + "@" + registerInfo.domain,
+      email: registerInfo.email + "@" + registerInfo.domain.domain,
       nickname: registerInfo.nickname,
       phone: registerInfo.phone,
       birth: registerInfo.birth,
@@ -97,6 +136,7 @@ const Register = () => {
           window.alert(
             "비밀번호 확인이 정상적으로 이루어지지 않았습니다.\n다시 확인해 주세요."
           );
+
           return false;
         }
       }
@@ -162,6 +202,7 @@ const Register = () => {
                   <input
                     type="text"
                     className="register-section-box-input-email-domain"
+                    placeholder="도메인"
                     id="domain"
                     value={registerInfo.domain}
                     onClick={() => setClickSection("email")}
@@ -173,12 +214,32 @@ const Register = () => {
                           : "white",
                     }}
                   />
-                  <button className="register-section-box-input-email-drop">
+                  <button
+                    className="register-section-box-input-email-drop"
+                    onClick={() => setDomainOpenState(!domainOpenState)}
+                  >
                     <FontAwesomeIcon
                       icon={faChevronDown}
                       className="down-icon"
-                    ></FontAwesomeIcon>{" "}
+                    ></FontAwesomeIcon>
                   </button>
+                  <div
+                    className={
+                      "register-section-box-input-email-option" +
+                      (domainOpenState ? "-active" : "")
+                    }
+                  >
+                    {domainOption.map((option, index) => (
+                      <div
+                        onClick={() =>
+                          onOptionSelectHandler(Object.values(option)[0])
+                        }
+                        key={index}
+                      >
+                        {Object.values(option)[0]}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <></>
@@ -292,27 +353,36 @@ const Register = () => {
                   )}
                 </div>
               ) : page === 1 ? (
-                <div
-                  className={
-                    "register-section-box-input" +
-                    (clickSection === "phone" ? "-active" : "")
-                  }
-                  style={{
-                    backgroundColor:
-                      clickSection !== "phone" && registerInfo.phone
-                        ? "#ebebeb"
-                        : "white",
-                  }}
-                >
-                  <input
-                    type="text"
-                    className="register-section-box-input-passwd"
-                    placeholder="연락처"
-                    id="phone"
-                    value={registerInfo.phone}
-                    onClick={() => setClickSection("phone")}
-                    onChange={onChangeHandler}
-                  />
+                <div>
+                  <div
+                    className={
+                      "register-section-box-input" +
+                      (clickSection === "phone" ? "-active" : "")
+                    }
+                    style={{
+                      backgroundColor:
+                        clickSection !== "phone" && registerInfo.phone
+                          ? "#ebebeb"
+                          : "white",
+                    }}
+                  >
+                    <input
+                      type="text"
+                      className="register-section-box-input-passwd"
+                      placeholder="연락처"
+                      id="phone"
+                      value={registerInfo.phone}
+                      onClick={() => setClickSection("phone")}
+                      onChange={onChangeHandler}
+                    />
+                  </div>
+                  {!rightPhone ? (
+                    <span className="register-section-box-input-tip">
+                      연락처 11자리를 정확히 입력해 주세요.
+                    </span>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               ) : (
                 <></>

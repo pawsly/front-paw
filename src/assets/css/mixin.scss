@@ -2,3 +2,17 @@ $background-color: #ebebeb;
 $primary-color: #55b80b;
 $disable-color: #7f8081;
 $sub-color: #928d8d;
+$desktop-width: 1728px;
+$laptopToDesktop-width: 1280px;
+
+@mixin desktopToLaptop {
+  @media (min-width: #{$laptopToDesktop-width}) and (max-width: #{$desktop-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
