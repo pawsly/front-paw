@@ -1,3 +1,81 @@
+@import "mixin";
+
+@include desktopToLaptop {
+  .login-section {
+    &-box {
+      width: 980px;
+      height: 586px;
+
+      &-tip {
+        padding-left: 23px;
+        width: calc(100% - 471px);
+      }
+
+      &-content {
+        padding-left: 46px;
+        padding-top: 59px;
+        width: 471px;
+
+        &-welcome {
+          margin-bottom: 45px;
+          font-size: 35px;
+        }
+
+        &-simple {
+          &-title {
+            margin-top: 35px;
+          }
+
+          &-icon {
+            img {
+              width: 46px;
+              height: 46px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@include desktop {
+  .login-section {
+    &-box {
+      width: 1180px;
+      height: 786px;
+
+      &-tip {
+        padding-left: 43px;
+        width: calc(100% - 571px);
+      }
+
+      &-content {
+        padding-left: 86px;
+        padding-top: 109px;
+        width: 571px;
+
+        &-welcome {
+          margin-bottom: 91px;
+          font-size: 45px;
+        }
+
+        &-simple {
+          &-title {
+            margin-top: 70px;
+          }
+
+          &-icon {
+            img {
+              width: 66px;
+              height: 66px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .login-section {
   height: 100%;
   display: flex;
@@ -6,8 +84,6 @@
   align-items: center;
 
   &-box {
-    width: 1180px;
-    height: 786px;
     display: flex;
     justify-content: center;
     background-color: white;
@@ -15,9 +91,7 @@
     box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.5);
 
     &-tip {
-      width: calc(100% - 571px);
       height: 100%;
-      padding-left: 43px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -35,15 +109,10 @@
     }
 
     &-content {
-      width: 571px;
-      padding-left: 86px;
-      padding-top: 109px;
       display: flex;
       flex-direction: column;
 
       &-welcome {
-        margin-bottom: 91px;
-        font-size: 45px;
         font-weight: bold;
         color: $primary-color;
       }
@@ -189,7 +258,6 @@
 
         &-title {
           width: 100%;
-          margin-top: 70px;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -211,8 +279,6 @@
           justify-content: center;
 
           img {
-            width: 66px;
-            height: 66px;
             margin: 14px 8px;
             border-radius: 50%;
             cursor: pointer;
